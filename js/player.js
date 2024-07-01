@@ -7,7 +7,7 @@ class Player {
     this.height = 70;
     this.x = 10;
     this.y = canvas.height / 2 - this.height / 2;
-    this.speed = 5;
+    this.speed = 10;
     this.image = new Image();
     this.image.src = "../assets/player2.png";
     this.throwImage = new Image();
@@ -24,8 +24,33 @@ class Player {
 
   draw(ctx) {
     if (this.ready && this.throwReady) {
-      return ctx.drawImage(this.currentImage, this.x, this.y, this.width, this.height);
+      return ctx.drawImage(
+        this.currentImage,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      );
     }
+  }
+
+  move(direction) {
+
+    if (direction === "up" && this.y > 0) {
+      // this.y -= this.speed;
+      this.y -= this.speed
+    } else if (direction === "down" && this.y + this.height < canvas.height) {
+      // this.y += this.speed;
+      this.y += this.speed ;
+
+    }
+  }
+
+  throw() {
+    this.currentImage = this.throwImage;
+    setTimeout(() => {
+      this.currentImage = this.image;
+    }, 200);
   }
 }
 
