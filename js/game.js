@@ -12,6 +12,7 @@ class Game {
       "../assets/squirtle.png",
       "../assets/pikachu.png",
     ];
+    this.score = 0;
     this.controls();
     this.spawnPokemon();
   }
@@ -22,6 +23,7 @@ class Game {
     this.updatePokeballs();
     this.updatePokemon();
     this.checkCollision();
+    this.displayScore();
   }
 
   controls() {
@@ -100,9 +102,16 @@ class Game {
           setTimeout(() => {
             this.pokemonArr.splice(pokemonIndex, 1);
           }, 100);
+          this.score += 10;
         }
       });
     });
+  }
+
+  displayScore() {
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText(`Score: ${this.score}`, 10, 30);
   }
 }
 
