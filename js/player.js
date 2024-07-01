@@ -35,25 +35,24 @@ class Player {
   }
 
   move(direction) {
-
     if (direction === "up" && this.y > 0) {
-      // this.y -= this.speed;
-      this.y -= this.speed
+      this.y -= this.speed;
     } else if (direction === "down" && this.y + this.height < canvas.height) {
-      // this.y += this.speed;
-      this.y += this.speed ;
-
+      this.y += this.speed;
     }
   }
 
   throw() {
     this.currentImage = this.throwImage;
+    const pokeball = new Pokeball(
+      this.x + this.width,
+      this.y + this.height / 2 - 10
+    );
     setTimeout(() => {
       this.currentImage = this.image;
     }, 200);
+    return pokeball;
   }
 }
-
-// window.Player = Player;
 
 console.log("Player class loaded");

@@ -6,27 +6,18 @@ const ctx = canvas.getContext("2d");
 class Game {
   constructor() {
     this.player = new Player(canvas);
+    this.pokeballs = [];
     this.controls();
   }
 
   start() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     this.player.draw(ctx);
+    this.updatePokeballs();
   }
 
   controls() {
     window.addEventListener("keydown", this.handleKeydown.bind(this));
-    // window.addEventListener("keydown", (e) => {
-    //   // preventDefault(e);
-    //   if (e.key === "ArrowUp") {
-    //     this.player.move("up");
-    //   } else if (e.key === "ArrowDown") {
-    //     this.player.move("down");
-    //   } else if (e.key === " ") {
-    //     this.player.throw();
-    //   }
-    //   // this.start();
-    // });
   }
 
   handleKeydown(e) {
@@ -43,10 +34,24 @@ class Game {
           this.player.move("down");
           break;
         case " ":
-          this.player.throw();
+          const pokeball = this.player.throw();
+          if (pokeball) {
+            this.pokeballs.push(pokeball);
+          }
           break;
       }
     }
+  }
+
+  updatePokeballs() {
+    this.pokeballs.forEach((pokeball, index) => {
+      pokeball.move();
+      pokeball.draw(ctx);
+
+      if (pokeball.x > canvas.width) {
+        this.pokeballs.splice(index, 1);
+      }
+    });
   }
 }
 
