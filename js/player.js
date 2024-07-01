@@ -3,22 +3,28 @@
 
 class Player {
   constructor(canvas) {
-    this.width = 50;
-    this.height = 50;
-    this.x = canvas.width / 2 - this.width / 2;
-    this.y = canvas.height - this.height - 10;
+    this.width = 70;
+    this.height = 70;
+    this.x = 10;
+    this.y = canvas.height / 2 - this.height / 2;
     this.speed = 5;
     this.image = new Image();
-    this.image.src = "../assets/player.png";
+    this.image.src = "../assets/player2.png";
+    this.throwImage = new Image();
+    this.throwImage.src = "../assets/player-throwing.png";
+    this.currentImage = this.image;
 
     this.image.onload = () => {
       this.ready = true;
     };
+    this.throwImage.onload = () => {
+      this.throwReady = true;
+    };
   }
 
   draw(ctx) {
-    if (this.ready) {
-      return ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
+    if (this.ready && this.throwReady) {
+      return ctx.drawImage(this.currentImage, this.x, this.y, this.width, this.height);
     }
   }
 }
