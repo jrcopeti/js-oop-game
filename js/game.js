@@ -21,6 +21,51 @@ const specialPokemonData = [
   { imageSrc: "../assets/special-pokemon/mewtwo.png", score: 100 },
 ];
 
+const levels = [
+  {
+    level: "1",
+    background: "../assets/background/mount-background.png",
+    maxScore: 500,
+    rate: 1000,
+    speed: 2,
+  },
+  {
+    level: "2",
+    background: "../assets/background/cave.png",
+    maxScore: 2000,
+    rate: 900,
+    speed: 3,
+  },
+  {
+    level: "3",
+    background: "../assets/background/veridian.png",
+    maxScore: 3000,
+    rate: 1000,
+    speed: 5,
+  },
+  {
+    level: "4",
+    background: "../assets/background/mirage-island.png",
+    maxScore: 4000,
+    rate: 1000,
+    speed: 6,
+  },
+  {
+    level: "5",
+    background: "../assets/background/safron.png",
+    maxScore: 5000,
+    rate: 500,
+    speed: 7,
+  },
+  {
+    level: "6",
+    background: "../assets/background/ancient.png",
+    maxScore: 6000,
+    rate: 500,
+    speed: 9,
+  },
+];
+
 class Game {
   constructor() {
     this.player = new Player(canvas);
@@ -29,11 +74,15 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
-    this.lifeScore = 100;
+    this.lifeScoreBonus = 500;
+    this.masterballScoreBonus = 2000;
     this.heart = new Image();
     this.heart.src = "../assets/heart.png";
     this.masterball = new Image();
     this.masterball.src = "../assets/masterball.png";
+    this.currentLevel = 0;
+    this.background = new Image();
+    this.background.src = levels[this.currentLevel].background;
     this.controls();
     this.spawnPokemon();
     this.spawnSpecialPokemon();
@@ -41,15 +90,19 @@ class Game {
 
   start() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
     this.player.draw(ctx);
     this.updatePokeballs();
     this.updatePokemon();
     this.checkCollision();
+    this.checkPlayerCollision();
     this.displayScore();
     this.displayLives();
+    this.displayLevel();
     this.displayMasterball();
     this.lifeBonus();
-    this.checkPlayerCollision();
+    this.masterballBonus();
+    this.levelUp();
 
     if (this.player.lives <= 0) {
       this.endGame();
@@ -115,8 +168,9 @@ class Game {
         randomPokemon.imageSrc,
         randomPokemon.score
       );
+      pokemon.speed = levels[this.currentLevel].speed;
       this.pokemonArr.push(pokemon);
-    }, 1000);
+    }, levels[this.currentLevel].rate);
   }
 
   spawnSpecialPokemon() {
@@ -194,7 +248,7 @@ class Game {
   }
 
   flashScreen() {
-    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -202,17 +256,44 @@ class Game {
     }, 500);
   }
 
+  levelUp() {
+    if (
+      this.currentLevel < levels.length - 1 &&
+      this.score >= levels[this.currentLevel].maxScore
+    ) {
+      this.currentLevel++;
+      this.background.src = levels[this.currentLevel].background;
+    }
+  }
+
   lifeBonus() {
-    if (this.score >= this.lifeScore) {
+    if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScore += 100;
+      this.lifeScoreBonus += 500;
+    }
+  }
+
+  masterballBonus() {
+    if (this.score >= this.masterballScoreBonus) {
+      this.player.gainMasterball();
+      this.masterballScoreBonus += 2000;
     }
   }
 
   displayScore() {
     ctx.font = "bold 25px Arial";
-    ctx.fillStyle = "white";
-    ctx.fillText(`Score: ${this.score}`, 10, 30);
+    ctx.fillStyle = "black";
+    ctx.fillText(
+      `Score: ${this.score} / ${levels[this.currentLevel].maxScore}`,
+      10,
+      30
+    );
+  }
+
+  displayLevel() {
+    ctx.font = "bold 25px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText(`Level: ${levels[this.currentLevel].level}`, 680, 30);
   }
 
   displayLives() {
