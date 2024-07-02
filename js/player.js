@@ -13,6 +13,8 @@ class Player {
     this.throwImage = new Image();
     this.throwImage.src = "../assets/player-throwing.png";
     this.currentImage = this.image;
+    this.opacity = 1;
+    this.lives = 3;
 
     this.image.onload = () => {
       this.ready = true;
@@ -24,6 +26,7 @@ class Player {
 
   draw(ctx) {
     if (this.ready && this.throwReady) {
+      ctx.globalAlpha = this.opacity;
       return ctx.drawImage(
         this.currentImage,
         this.x,
@@ -52,6 +55,14 @@ class Player {
       this.currentImage = this.image;
     }, 200);
     return pokeball;
+  }
+
+  loseLife() {
+    this.lives -= 1;
+  }
+
+  gainLife() {
+    this.lives += 1;
   }
 }
 

@@ -29,9 +29,12 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
+    this.lifeScore = 100
     this.controls();
     this.spawnPokemon();
     this.spawnSpecialPokemon();
+
+
   }
 
   start() {
@@ -41,6 +44,15 @@ class Game {
     this.updatePokemon();
     this.checkCollision();
     this.displayScore();
+    this.displayLives();
+    this.lifeBonus();
+    this.checkPlayerCollision();
+
+
+
+    if (this.player.lives <= 0) {
+      this.endGame();
+    }
   }
 
   controls() {
@@ -147,21 +159,64 @@ class Game {
     });
   }
 
+  checkPlayerCollision() {
+    this.pokemonArr.forEach((pokemon, index) => {
+      if (
+        pokemon.x < this.player.x + this.player.width &&
+        pokemon.x + pokemon.width > this.player.x &&
+        pokemon.y < this.player.y + this.player.height &&
+        pokemon.y + pokemon.height > this.player.y
+      ) {
+        this.player.opacity = 0.5;
+        setTimeout(() => {
+          this.player.opacity = 1;
+        }, 300);
+        this.player.loseLife();
+        this.pokemonArr.splice(index, 1);
+      }
+    });
+  }
+
+  lifeBonus() {
+    if (this.score >= this.lifeScore) {
+      this.player.gainLife();
+      this.lifeScore += 100;
+    }
+  }
+
   displayScore() {
     ctx.font = "20px Arial";
     ctx.fillStyle = "black";
     ctx.fillText(`Score: ${this.score}`, 10, 30);
   }
+
+  displayLives() {
+    ctx.font = "20px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText(`Lives: ${this.player.lives}`, 10, 60);
+  }
+
+  endGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "50px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+  }
 }
 
-const game = new Game();
+window.onload = () => {
+  const game = new Game();
+  setInterval(() => {
+    game.start();
+  }, Math.round(1000 / 60));
+};
 
-function gameLoop() {
-  game.start();
-  requestAnimationFrame(gameLoop);
-}
+// function gameLoop() {
+//   game.start();
+//   requestAnimationFrame(gameLoop);
+// }
 
-gameLoop();
+// gameLoop();
 
 console.log("Game class loaded");
 // });
