@@ -38,7 +38,8 @@ class Player {
   }
 
   move(direction) {
-    if (direction === "up" && this.y > 0) {
+    const topBoundary = 80
+    if (direction === "up" && this.y > topBoundary) {
       this.y -= this.speed;
     } else if (direction === "down" && this.y + this.height < canvas.height) {
       this.y += this.speed;
