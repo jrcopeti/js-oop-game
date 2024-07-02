@@ -4,7 +4,7 @@ class Pokemon {
     this.height = 70;
     this.x = canvas.width;
     this.y = Math.max(
-      80,
+      85,
       Math.floor(Math.random() * (canvas.height - this.height))
     );
     this.speed = 5;

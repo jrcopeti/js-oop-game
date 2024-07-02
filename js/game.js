@@ -29,12 +29,14 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
-    this.lifeScore = 100
+    this.lifeScore = 100;
+    this.heart = new Image();
+    this.heart.src = "../assets/heart.png";
+    this.masterball = new Image();
+    this.masterball.src = "../assets/masterball.png";
     this.controls();
     this.spawnPokemon();
     this.spawnSpecialPokemon();
-
-
   }
 
   start() {
@@ -45,10 +47,9 @@ class Game {
     this.checkCollision();
     this.displayScore();
     this.displayLives();
+    this.displayMasterball();
     this.lifeBonus();
     this.checkPlayerCollision();
-
-
 
     if (this.player.lives <= 0) {
       this.endGame();
@@ -61,7 +62,7 @@ class Game {
 
   handleKeydown(e) {
     const key = e.key;
-    const possibleKeys = ["ArrowUp", "ArrowDown", " "];
+    const possibleKeys = ["ArrowUp", "ArrowDown", " ", "m"];
     if (possibleKeys.includes(key)) {
       e.preventDefault();
 
@@ -74,10 +75,13 @@ class Game {
           break;
         case " ":
           const pokeball = this.player.throw();
-          if (pokeball) {
-            this.pokeballArr.push(pokeball);
-          }
+          this.pokeballArr.push(pokeball);
           break;
+        case "m":
+          const used = this.player.useMasterball();
+          if (used) {
+            this.defeatAllPokemon();
+          }
       }
     }
   }
@@ -177,6 +181,27 @@ class Game {
     });
   }
 
+  defeatAllPokemon() {
+    this.pokemonArr.forEach((pokemon) => {
+      pokemon.image.src = "../assets/capture.png";
+      pokemon.speed = 0;
+      setTimeout(() => {
+        this.pokemonArr = [];
+      }, 100);
+      this.score += pokemon.score;
+    });
+    this.flashScreen();
+  }
+
+  flashScreen() {
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    setTimeout(() => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      this.start();
+    }, 500);
+  }
+
   lifeBonus() {
     if (this.score >= this.lifeScore) {
       this.player.gainLife();
@@ -185,15 +210,37 @@ class Game {
   }
 
   displayScore() {
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "black";
+    ctx.font = "bold 25px Arial";
+    ctx.fillStyle = "white";
     ctx.fillText(`Score: ${this.score}`, 10, 30);
   }
 
   displayLives() {
-    ctx.font = "20px Arial";
-    ctx.fillStyle = "black";
-    ctx.fillText(`Lives: ${this.player.lives}`, 10, 60);
+    const heartWidth = 20;
+    const heartHeight = 20;
+    for (let i = 0; i < this.player.lives; i++) {
+      ctx.drawImage(
+        this.heart,
+        10 + i * (heartWidth + 5),
+        40,
+        heartWidth,
+        heartHeight
+      );
+    }
+  }
+
+  displayMasterball() {
+    const masterballWidth = 20;
+    const masterballHeight = 20;
+    for (let i = 0; i < this.player.masterballs; i++) {
+      ctx.drawImage(
+        this.masterball,
+        10 + i * (masterballWidth + 5),
+        65,
+        masterballWidth,
+        masterballHeight
+      );
+    }
   }
 
   endGame() {

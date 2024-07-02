@@ -15,6 +15,7 @@ class Player {
     this.currentImage = this.image;
     this.opacity = 1;
     this.lives = 3;
+    this.masterballs = 1;
 
     this.image.onload = () => {
       this.ready = true;
@@ -38,7 +39,7 @@ class Player {
   }
 
   move(direction) {
-    const topBoundary = 80
+    const topBoundary = 85;
     if (direction === "up" && this.y > topBoundary) {
       this.y -= this.speed;
     } else if (direction === "down" && this.y + this.height < canvas.height) {
@@ -56,6 +57,22 @@ class Player {
       this.currentImage = this.image;
     }, 200);
     return pokeball;
+  }
+
+  useMasterball() {
+    if (this.masterballs > 0) {
+      this.currentImage = this.throwImage;
+      this.masterballs -= 1;
+      setTimeout(() => {
+        this.currentImage = this.image;
+      }, 200);
+      return true;
+    }
+    return false;
+  }
+
+  gainMasterball() {
+    this.masterballs += 1;
   }
 
   loseLife() {
