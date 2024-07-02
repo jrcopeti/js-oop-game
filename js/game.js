@@ -1,20 +1,37 @@
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+const pokemonData = [
+  { imageSrc: "../assets/pokemon/bulbasaur.png", score: 20 },
+  { imageSrc: "../assets/pokemon/butterfree.png", score: 10 },
+  { imageSrc: "../assets/pokemon/charmander.png", score: 20 },
+  { imageSrc: "../assets/pokemon/jigglypuff.png", score: 10 },
+  { imageSrc: "../assets/pokemon/meowth.png", score: 10 },
+  { imageSrc: "../assets/pokemon/pidgiotto.png", score: 10 },
+  { imageSrc: "../assets/pokemon/pikachu.png", score: 30 },
+  { imageSrc: "../assets/pokemon/squirtle.png", score: 20 },
+  { imageSrc: "../assets/pokemon/starmie.png", score: 20 },
+];
+
+const specialPokemonData = [
+  { imageSrc: "../assets/special-pokemon/celebi.png", score: 100 },
+  { imageSrc: "../assets/special-pokemon/entei.png", score: 150 },
+  { imageSrc: "../assets/special-pokemon/ho-oh.png", score: 100 },
+  { imageSrc: "../assets/special-pokemon/mew.png", score: 150 },
+  { imageSrc: "../assets/special-pokemon/mewtwo.png", score: 100 },
+];
+
 class Game {
   constructor() {
     this.player = new Player(canvas);
     this.pokeballArr = [];
     this.pokemonArr = [];
-    this.pokemonImages = [
-      "../assets/bulbasaur.png",
-      "../assets/charmander.png",
-      "../assets/squirtle.png",
-      "../assets/pikachu.png",
-    ];
+    this.pokemonData = pokemonData;
+    this.specialPokemonData = specialPokemonData;
     this.score = 0;
     this.controls();
     this.spawnPokemon();
+    this.spawnSpecialPokemon();
   }
 
   start() {
@@ -76,15 +93,37 @@ class Game {
 
   spawnPokemon() {
     setInterval(() => {
-      const imageSrc = this.getRandomPokemonImage();
-      const pokemon = new Pokemon(canvas, imageSrc);
+      const randomPokemon = this.getRandomPokemon();
+      const pokemon = new Pokemon(
+        canvas,
+        randomPokemon.imageSrc,
+        randomPokemon.score
+      );
       this.pokemonArr.push(pokemon);
     }, 1000);
   }
 
-  getRandomPokemonImage() {
-    const randomIndex = Math.floor(Math.random() * this.pokemonImages.length);
-    return this.pokemonImages[randomIndex];
+  spawnSpecialPokemon() {
+    setInterval(() => {
+      const randomSpecialPokemon = this.getRandomPokemon(true);
+      const specialPokemon = new Pokemon(
+        canvas,
+        randomSpecialPokemon.imageSrc,
+        randomSpecialPokemon.score
+      );
+      this.pokemonArr.push(specialPokemon);
+    }, 10000);
+  }
+
+  getRandomPokemon(special = false) {
+    if (special) {
+      const randomIndex = Math.floor(
+        Math.random() * this.specialPokemonData.length
+      );
+      return this.specialPokemonData[randomIndex];
+    }
+    const randomIndex = Math.floor(Math.random() * this.pokemonData.length);
+    return this.pokemonData[randomIndex];
   }
 
   checkCollision() {
@@ -102,7 +141,7 @@ class Game {
           setTimeout(() => {
             this.pokemonArr.splice(pokemonIndex, 1);
           }, 100);
-          this.score += 10;
+          this.score += pokemon.score;
         }
       });
     });
