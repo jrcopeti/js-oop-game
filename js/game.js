@@ -2,32 +2,50 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const pokemonData = [
-  { imageSrc: "../assets/pokemon/bulbasaur.png", score: 20 },
-  { imageSrc: "../assets/pokemon/butterfree.png", score: 10 },
-  { imageSrc: "../assets/pokemon/charmander.png", score: 20 },
-  { imageSrc: "../assets/pokemon/jigglypuff.png", score: 10 },
-  { imageSrc: "../assets/pokemon/meowth.png", score: 10 },
-  { imageSrc: "../assets/pokemon/pidgiotto.png", score: 10 },
-  { imageSrc: "../assets/pokemon/pikachu.png", score: 30 },
-  { imageSrc: "../assets/pokemon/squirtle.png", score: 20 },
-  { imageSrc: "../assets/pokemon/starmie.png", score: 20 },
+  { imageSrc: "../assets/pokemon/bulbasaur.png", score: 100 },
+  { imageSrc: "../assets/pokemon/butterfree.png", score: 50 },
+  { imageSrc: "../assets/pokemon/charmander.png", score: 100 },
+  { imageSrc: "../assets/pokemon/jigglypuff.png", score: 100 },
+  { imageSrc: "../assets/pokemon/meowth.png", score: 100 },
+  { imageSrc: "../assets/pokemon/pidgiotto.png", score: 50 },
+  { imageSrc: "../assets/pokemon/pikachu.png", score: 150 },
+  { imageSrc: "../assets/pokemon/squirtle.png", score: 100 },
+  { imageSrc: "../assets/pokemon/starmie.png", score: 150 },
 ];
 
 const specialPokemonData = [
-  { imageSrc: "../assets/special-pokemon/celebi.png", score: 100 },
-  { imageSrc: "../assets/special-pokemon/entei.png", score: 150 },
-  { imageSrc: "../assets/special-pokemon/ho-oh.png", score: 100 },
-  { imageSrc: "../assets/special-pokemon/mew.png", score: 150 },
-  { imageSrc: "../assets/special-pokemon/mewtwo.png", score: 100 },
+  {
+    name: "Celebi",
+    imageSrc: "../assets/special-pokemon/celebi.png",
+    score: 200,
+  },
+  {
+    name: "Entei",
+    imageSrc: "../assets/special-pokemon/entei.png",
+    score: 300,
+  },
+  {
+    name: "Ho-oh",
+    imageSrc: "../assets/special-pokemon/ho-oh.png",
+    score: 500,
+  },
+  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 500 },
+  {
+    name: "Mewtwo",
+    imageSrc: "../assets/special-pokemon/mewtwo.png",
+    score: 300,
+  },
 ];
 
 const levels = [
   {
     level: "1",
     background: "../assets/background/mount-background.png",
-    maxCount: 200,
-    rate: 200,
-    speed: 10,
+    maxCount: 30,
+    rate: 1000,
+    speed: 2,
+    specialRate: 10000,
+    specialSpeed: 5,
   },
   {
     level: "2",
@@ -74,7 +92,7 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
-    this.lifeScoreBonus = 500;
+    this.lifeScoreBonus = 3000;
     this.masterballScoreBonus = 2000;
     this.heart = new Image();
     this.heart.src = "../assets/heart.png";
@@ -183,8 +201,9 @@ class Game {
         randomSpecialPokemon.imageSrc,
         randomSpecialPokemon.score
       );
+      specialPokemon.speed = levels[this.currentLevel].specialSpeed;
       this.pokemonArr.push(specialPokemon);
-    }, 10000);
+    }, levels[this.currentLevel].specialRate);
   }
 
   getRandomPokemon(special = false) {
@@ -215,6 +234,13 @@ class Game {
           }, 100);
           this.score += pokemon.score;
           this.pokemonCount += 1;
+
+          if (pokemon.name === "Mewtwo") {
+            this.player.gainMasterball();
+          }
+          if (pokemon.name === "Mew") {
+            this.player.gainLife();
+          }
         }
       });
     });
@@ -276,14 +302,14 @@ class Game {
   lifeBonus() {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScoreBonus += 1000;
+      this.lifeScoreBonus += 3000;
     }
   }
 
   masterballBonus() {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
-      this.masterballScoreBonus += 1500;
+      this.masterballScoreBonus += 2000;
     }
   }
 
