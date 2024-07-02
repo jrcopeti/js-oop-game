@@ -25,42 +25,42 @@ const levels = [
   {
     level: "1",
     background: "../assets/background/mount-background.png",
-    maxScore: 500,
-    rate: 1000,
-    speed: 2,
+    maxCount: 200,
+    rate: 200,
+    speed: 10,
   },
   {
     level: "2",
     background: "../assets/background/cave.png",
-    maxScore: 2000,
+    maxCount: 5,
     rate: 900,
     speed: 3,
   },
   {
     level: "3",
     background: "../assets/background/veridian.png",
-    maxScore: 3000,
+    maxCount: 5,
     rate: 1000,
     speed: 5,
   },
   {
     level: "4",
     background: "../assets/background/mirage-island.png",
-    maxScore: 4000,
+    maxCount: 4000,
     rate: 1000,
     speed: 6,
   },
   {
     level: "5",
     background: "../assets/background/safron.png",
-    maxScore: 5000,
+    maxCount: 5000,
     rate: 500,
     speed: 7,
   },
   {
     level: "6",
     background: "../assets/background/ancient.png",
-    maxScore: 6000,
+    maxCount: 6000,
     rate: 500,
     speed: 9,
   },
@@ -83,6 +83,7 @@ class Game {
     this.currentLevel = 0;
     this.background = new Image();
     this.background.src = levels[this.currentLevel].background;
+    this.pokemonCount = 0;
     this.controls();
     this.spawnPokemon();
     this.spawnSpecialPokemon();
@@ -99,6 +100,7 @@ class Game {
     this.displayScore();
     this.displayLives();
     this.displayLevel();
+    this.displayCount();
     this.displayMasterball();
     this.lifeBonus();
     this.masterballBonus();
@@ -212,6 +214,7 @@ class Game {
             this.pokemonArr.splice(pokemonIndex, 1);
           }, 100);
           this.score += pokemon.score;
+          this.pokemonCount += 1;
         }
       });
     });
@@ -243,12 +246,13 @@ class Game {
         this.pokemonArr = [];
       }, 100);
       this.score += pokemon.score;
+      this.pokemonCount += 1;
     });
     this.flashScreen();
   }
 
   flashScreen() {
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -259,9 +263,12 @@ class Game {
   levelUp() {
     if (
       this.currentLevel < levels.length - 1 &&
-      this.score >= levels[this.currentLevel].maxScore
+      this.pokemonCount >= levels[this.currentLevel].maxCount
     ) {
       this.currentLevel++;
+      this.pokemonCount = 0;
+      this.pokemonArr = [];
+      this.flashScreen();
       this.background.src = levels[this.currentLevel].background;
     }
   }
@@ -269,31 +276,41 @@ class Game {
   lifeBonus() {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScoreBonus += 500;
+      this.lifeScoreBonus += 1000;
     }
   }
 
   masterballBonus() {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
-      this.masterballScoreBonus += 2000;
+      this.masterballScoreBonus += 1500;
     }
   }
 
+  // displayScore() {
+  //   ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+  //   ctx.fillRect(5, 6, 160, 32);
+  //   ctx.font = "bold 25px Arial";
+  //   ctx.fillStyle = "white";
+  //   ctx.fillText(`Score: ${this.score}`, 10, 30);
+  // }
   displayScore() {
+    const text = `Score: ${this.score}`;
+    const textWidth = ctx.measureText(text).width;
+    const padding = 20;
     ctx.font = "bold 25px Arial";
-    ctx.fillStyle = "black";
-    ctx.fillText(
-      `Score: ${this.score} / ${levels[this.currentLevel].maxScore}`,
-      10,
-      30
-    );
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(5, 6, textWidth + padding, 32);
+    ctx.fillStyle = "white";
+    ctx.fillText(text, 10, 30);
   }
 
   displayLevel() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(685, 6, 110, 32);
     ctx.font = "bold 25px Arial";
-    ctx.fillStyle = "black";
-    ctx.fillText(`Level: ${levels[this.currentLevel].level}`, 680, 30);
+    ctx.fillStyle = "white";
+    ctx.fillText(`Level: ${levels[this.currentLevel].level}`, 695, 30);
   }
 
   displayLives() {
@@ -324,11 +341,37 @@ class Game {
     }
   }
 
+  // displayCount() {
+  //   ctx.font = "bold 25px Arial";
+  //   ctx.fillStyle = "white";
+  //   ctx.fillText(
+  //     `Catch: ${this.pokemonCount} / ${levels[this.currentLevel].maxCount}`,
+  //     605,
+  //     60
+  //   );
+  // }
+
+  displayCount() {
+    const text = `Catch: ${this.pokemonCount} / ${
+      levels[this.currentLevel].maxCount
+    }`;
+    const textWidth = ctx.measureText(text).width;
+    const pr = 20;
+    const canvasWidth = ctx.canvas.width;
+    const xPosition = canvasWidth - textWidth - pr;
+
+    ctx.font = "bold 25px Arial";
+    ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
+    ctx.fillRect(xPosition - 10, 40, textWidth + 30, 35); // Adjust padding as needed
+    ctx.fillStyle = "white";
+    ctx.fillText(text, xPosition, 65);
+  }
+
   endGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.font = "50px Arial";
     ctx.fillStyle = "black";
-    ctx.fillText("Game Over", canvas.width / 2 - 100, canvas.height / 2);
+    ctx.fillText("Game Over", canvas.width / 2 - 150, canvas.height / 2);
   }
 }
 

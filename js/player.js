@@ -14,8 +14,8 @@ class Player {
     this.throwImage.src = "../assets/player-throwing.png";
     this.currentImage = this.image;
     this.opacity = 1;
-    this.lives = 10;
-    this.masterballs = 10;
+    this.lives = 3;
+    this.masterballs = 1;
 
     this.image.onload = () => {
       this.ready = true;
@@ -37,7 +37,6 @@ class Player {
       );
     }
   }
-
 
   // draw(ctx) {
   //   if (this.ready && this.throwReady) {
