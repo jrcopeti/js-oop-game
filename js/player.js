@@ -84,12 +84,23 @@ class Player {
     this.masterballs += 1;
   }
 
+  loseMasterball() {
+    this.masterballs -= 1;
+  }
+
   loseLife() {
     this.lives -= 1;
   }
 
   gainLife() {
     this.lives += 1;
+  }
+
+  hit() {
+    this.opacity = 0.5;
+    setTimeout(() => {
+      this.opacity = 1;
+    }, 300);
   }
 }
 

@@ -2,38 +2,102 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
 const pokemonData = [
-  { imageSrc: "../assets/pokemon/bulbasaur.png", score: 100 },
-  { imageSrc: "../assets/pokemon/butterfree.png", score: 50 },
-  { imageSrc: "../assets/pokemon/charmander.png", score: 100 },
-  { imageSrc: "../assets/pokemon/jigglypuff.png", score: 100 },
-  { imageSrc: "../assets/pokemon/meowth.png", score: 100 },
-  { imageSrc: "../assets/pokemon/pidgiotto.png", score: 50 },
-  { imageSrc: "../assets/pokemon/pikachu.png", score: 150 },
-  { imageSrc: "../assets/pokemon/squirtle.png", score: 100 },
-  { imageSrc: "../assets/pokemon/starmie.png", score: 150 },
+  {
+    name: "Bulbasaur",
+    imageSrc: "../assets/pokemon/bulbasaur.png",
+    score: 100,
+  },
+  {
+    name: "Butterfree",
+    imageSrc: "../assets/pokemon/butterfree.png",
+    score: 50,
+  },
+  {
+    name: "Charmander",
+    imageSrc: "../assets/pokemon/charmander.png",
+    score: 100,
+  },
+  {
+    name: "Jigglypuff",
+    imageSrc: "../assets/pokemon/jigglypuff.png",
+    score: 100,
+  },
+  { name: "Meowth", imageSrc: "../assets/pokemon/meowth.png", score: 100 },
+  { name: "Pidgiotto", imageSrc: "../assets/pokemon/pidgiotto.png", score: 50 },
+  { name: "Pikachu", imageSrc: "../assets/pokemon/pikachu.png", score: 150 },
+  { name: "Squirtle", imageSrc: "../assets/pokemon/squirtle.png", score: 100 },
+  { name: "Starmie", imageSrc: "../assets/pokemon/starmie.png", score: 150 },
+  { name: "Ratata", imageSrc: "../assets/pokemon/ratata.png", score: 50 },
+  { name: "Totodile", imageSrc: "../assets/pokemon/totodile.png", score: 100 },
+  {
+    name: "Cyndaquil",
+    imageSrc: "../assets/pokemon/cyndaquil.png",
+    score: 100,
+  },
+  {
+    name: "Chicorita",
+    imageSrc: "../assets/pokemon/chicorita.png",
+    score: 100,
+  },
+  { name: "Eevee", imageSrc: "../assets/pokemon/eevee.png", score: 100 },
+  { name: "Psyduck", imageSrc: "../assets/pokemon/psyduck.png", score: 150 },
+  { name: "Magikarp", imageSrc: "../assets/pokemon/magikarp.png", score: 20 },
+  // enemy pokemon
+  { name: "Ekans", imageSrc: "../assets/pokemon/ekans.png", score: 300 },
+  { name: "Koffing", imageSrc: "../assets/pokemon/koffing.png", score: 300 },
+  { name: "Kadabra", imageSrc: "../assets/pokemon/kadabra.png", score: 500 },
+  { name: "Gasly", imageSrc: "../assets/pokemon/gasly.png", score: 200 },
 ];
 
 const specialPokemonData = [
   {
     name: "Celebi",
     imageSrc: "../assets/special-pokemon/celebi.png",
-    score: 200,
+    score: 1000,
   },
   {
     name: "Entei",
     imageSrc: "../assets/special-pokemon/entei.png",
-    score: 300,
+    score: 500,
   },
   {
     name: "Ho-oh",
     imageSrc: "../assets/special-pokemon/ho-oh.png",
     score: 500,
   },
-  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 500 },
+  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 200 },
   {
     name: "Mewtwo",
     imageSrc: "../assets/special-pokemon/mewtwo.png",
-    score: 300,
+    score: 200,
+  },
+  {
+    name: "Dragonite",
+    imageSrc: "../assets/special-pokemon/dragonite.png",
+    score: 800,
+  },
+  {
+    name: "Lugia",
+    imageSrc: "../assets/special-pokemon/lugia.png",
+    score: 500,
+  },
+  { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 0 },
+
+  // enemy pokemon
+  {
+    name: "Arbok",
+    imageSrc: "../assets/special-pokemon/arbok.png",
+    score: 500,
+  },
+  {
+    name: "Weezing",
+    imageSrc: "../assets/special-pokemon/weezing.png",
+    score: 500,
+  },
+  {
+    name: "Gengar",
+    imageSrc: "../assets/special-pokemon/gengar.png",
+    score: 500,
   },
 ];
 
@@ -186,7 +250,8 @@ class Game {
       const pokemon = new Pokemon(
         canvas,
         randomPokemon.imageSrc,
-        randomPokemon.score
+        randomPokemon.score,
+        randomPokemon.name
       );
       pokemon.speed = levels[this.currentLevel].speed;
       this.pokemonArr.push(pokemon);
@@ -199,7 +264,8 @@ class Game {
       const specialPokemon = new Pokemon(
         canvas,
         randomSpecialPokemon.imageSrc,
-        randomSpecialPokemon.score
+        randomSpecialPokemon.score,
+        randomSpecialPokemon.name
       );
       specialPokemon.speed = levels[this.currentLevel].specialSpeed;
       this.pokemonArr.push(specialPokemon);
@@ -226,21 +292,53 @@ class Game {
           pokeball.y < pokemon.y + pokemon.height &&
           pokeball.y + pokeball.height > pokemon.y
         ) {
+          console.log("Collision detected with", pokemon.name);
+
           pokemon.image.src = "../assets/capture.png";
           pokemon.speed = 0;
           this.pokeballArr.splice(pokeballIndex, 1);
           setTimeout(() => {
             this.pokemonArr.splice(pokemonIndex, 1);
           }, 100);
-          this.score += pokemon.score;
-          this.pokemonCount += 1;
 
-          if (pokemon.name === "Mewtwo") {
-            this.player.gainMasterball();
+          switch (pokemon.name) {
+            case "Weezing":
+            case "Arbok":
+              if (this.player.masterballs > 0) {
+                this.player.loseMasterball();
+              }
+              this.score -= pokemon.score;
+              this.flashScreen();
+              break;
+            case "Ekans":
+            case "Koffing":
+            case "Kadabra":
+              this.score -= pokemon.score;
+              this.flashScreen();
+              break;
+            case "Gengar":
+            case "Gastly":
+              this.score -= pokemon.score;
+              this.player.loseLife();
+              this.player.hit();
+              break;
+            case "Mewtwo":
+              this.player.gainMasterball();
+              this.score += pokemon.score;
+              break;
+            case "Mew":
+              this.player.gainLife();
+              this.score += pokemon.score;
+              break;
+            case "Jynx":
+              this.defeatAllPokemon();
+              this.score += pokemon.score;
+            default:
+              this.score += pokemon.score;
+              break;
           }
-          if (pokemon.name === "Mew") {
-            this.player.gainLife();
-          }
+          this.pokemonCount += 1;
+          console.log("Pokemon count after increment:", this.pokemonCount); // Debugging
         }
       });
     });
@@ -254,10 +352,7 @@ class Game {
         pokemon.y < this.player.y + this.player.height &&
         pokemon.y + pokemon.height > this.player.y
       ) {
-        this.player.opacity = 0.5;
-        setTimeout(() => {
-          this.player.opacity = 1;
-        }, 300);
+        this.player.hit();
         this.player.loseLife();
         this.pokemonArr.splice(index, 1);
       }

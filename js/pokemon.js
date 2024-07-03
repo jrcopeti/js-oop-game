@@ -1,5 +1,5 @@
 class Pokemon {
-  constructor(canvas, imgSrc, score) {
+  constructor(canvas, imgSrc, score, name) {
     this.width = 70;
     this.height = 70;
     this.x = canvas.width;
@@ -9,6 +9,7 @@ class Pokemon {
     );
     this.speed = 3 ;
     this.score = score;
+    this.name = name
     this.image = new Image();
     this.image.src = imgSrc;
     this.image.onload = () => {
