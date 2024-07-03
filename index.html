@@ -9,36 +9,139 @@
     <style></style>
   </head>
   <body>
-    <main>
-      <!-- #game-intro is initially shown on the game start screen -->
-      <div id="game-intro">
-        <div class="intro-screen">
-          <img src="/assets/intro.png" alt="" class="intro-img" />
-          <img src="/assets/logo.png" alt="" class="logo-img" />
-          <img src="/assets/logo2.jpg" alt="" class="logo-img" />
-          <h1>Catch them all</h1>
-          <br />
-          <section class="start-section">
-            <button class="start-button">Start Game</button>
-          </section>
-        </div>
+    <!-- #game-intro is initially shown on the game start screen -->
+    <div id="game-intro">
+      <div class="intro-screen">
+        <img src="/assets/intro.png" alt="" class="intro-img" />
+        <img src="/assets/logo.png" alt="" class="logo-img" />
+        <img src="/assets/logo2.jpg" alt="" class="logo-img" />
+        <h1>Catch them all</h1>
+        <br />
+        <section class="start-section">
+          <button id="start-button">Start Game</button>
+        </section>
       </div>
+    </div>
 
-      <div id="game-inter">
-        THIS IS A GAME INTER
+    <!-- #game-inter is initially hidden using CSS style display: none -->
+
+    <div id="game-inter">
+      <div class="inter-screen">
+        <h2>Controls and Score</h2>
+
+        <section class="control-section">
+          <div class="control-container">
+            <img src="/assets/controls/up.png" alt="" />
+            <img src="/assets/controls/down.png" alt="" />
+            <p>Move</p>
+            <img src="/assets/controls/space.png" alt="" />
+            <p>Throw Pokéball</p>
+            <img src="/assets/controls/m.png" alt="" />
+            <p>Use Masterball</p>
+          </div>
+        </section>
+
+        <section class="pokemon-section">
+          <div>
+            <h2>Pokemon</h2>
+          </div>
+          <div class="pokemon-container">
+            <img src="./assets/pokemon/bulbasaur.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/butterfree.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/charmander.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/chicorita.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/cyndaquil.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/eevee.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/jigglypuff.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/magikarp.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/meowth.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/pidgiotto.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/pikachu.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/psyduck.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/ratata.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/squirtle.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/starmie.png" alt="" />
+            <p>100 &uarr;</p>
+            <img src="./assets/pokemon/totodile.png" alt="" />
+            <p>100 &uarr;</p>
+          </div>
+        </section>
+
+        <section class="rare-section">
+          <div>
+            <h2>Rare Pokémon</h2>
+          </div>
+
+          <div class="rare-container">
+            <img src="./assets/special-pokemon/celebi.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/dragonite.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/entei.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/ho-oh.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/jynx.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/lugia.png" alt="" />
+            <p>200 &uarr;</p>
+            <img src="./assets/special-pokemon/mewtwo.png" alt="" />
+            <p>200 &uarr; + masterball</p>
+            <img src="./assets/special-pokemon/mew.png" alt="" />
+            <p>200 &uarr; + life</p>
+          </div>
+        </section>
+
+        <section class="enemy-section">
+          <div>
+            <h2>Enemies</h2>
+          </div>
+
+          <div class="enemy-container">
+            <img src="./assets/pokemon/ekans.png" alt="" />
+            <p>200 &darr;</p>
+            <img src="./assets/pokemon/koffing.png" alt="" />
+            <p>200 &darr;</p>
+            <img src="./assets/pokemon/kadabra.png" alt="" />
+            <p>200 &darr;</p>
+            <img src="./assets/pokemon/gastly.png" alt="" />
+            <p>200 & life &darr;</p>
+            <img src="./assets/special-pokemon/gengar.png" alt="" />
+            <p>200 & life &darr;</p>
+            <img src="./assets/special-pokemon/arbok.png" alt="" />
+            <p>200 &darr + masterball &darr;;</p>
+            <img src="./assets/special-pokemon/weezing.png" alt="" />
+            <p>200 &darr; + masterball &darr;</p>
+          </div>
+        </section>
+
         <button id="play-button">Play Game</button>
       </div>
+    </div>
 
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-      <!-- #game-end is initially hidden using CSS style display: none -->
-      <div id="game-end">
-        <!-- <img src="./images/logo.png" alt="" class="logo-img" /> -->
-        <h2>Game Over</h2>
-        <br />
-        <button id="restart-button">Restart</button>
-      </div>
-    </main>
+    <!-- #game-end is initially hidden using CSS style display: none -->
+    <div id="game-end">
+      <!-- <img src="./images/logo.png" alt="" class="logo-img" /> -->
+      <h2>Game Over</h2>
+      <br />
+      <button id="restart-button">Restart</button>
+    </div>
 
     <script src="js/data.js"></script>
     <script src="js/player.js"></script>

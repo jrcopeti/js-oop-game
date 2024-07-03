@@ -35,7 +35,7 @@ window.onload = () => {
   playButton.addEventListener("click", () => {
     playGame();
   });
-  
+
   restartButton.addEventListener("click", () => {
     location.reload();
   });

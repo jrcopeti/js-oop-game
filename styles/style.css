@@ -1,11 +1,9 @@
-body,
 html {
   height: 100%;
   margin: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -25,14 +23,23 @@ h1 {
   transform: translate(-50%, -50%);
 }
 
+#game-intro {
+  display: block;
+  overflow: hidden;
+}
+
+.intro-screen {
+  overflow: hidden;
+}
+
 .intro-img {
-  width: auto;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  z-index: 0;
-  position: relative;
+  width: 100%;
+  height: auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  z-index: 999;
 }
 
 .logo-img {
@@ -54,7 +61,7 @@ h1 {
   z-index: 999;
 }
 
-.start-button {
+#start-button {
   background-color: #f4c542;
   color: #fff;
   font-size: 1.5rem;
@@ -66,12 +73,45 @@ h1 {
   margin-top: 20px;
 }
 
-.start-button:hover {
+#start-button:hover {
   background-color: #ecb10f;
 }
 
-#game-intro {
-  display: block;
+#game-inter {
+  display: none;
+  height: 100vh;
+  width: 100vw;
+}
+
+.inter-screen {
+  padding: 1rem 0rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  text-align: center;
+}
+
+.pokemon-section,
+.rare-section,
+.enemy-section .control-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.pokemon-container,
+.rare-container,
+.enemy-container,
+.control-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+.control-container img {
+  width: auto;
+  height: 50px;
 }
 
 #game-end {
@@ -87,8 +127,4 @@ canvas {
   /* background: url("./assets/background/safron.png"); */
   background-size: cover;
   overflow: hidden;
-}
-
-#game-inter {
-  display: none;
 }
