@@ -7,7 +7,7 @@ class Player {
     this.height = 70;
     this.x = 10;
     this.y = canvas.height / 2 - this.height / 2;
-    this.speed = 15;
+    this.speed = 20;
     this.image = new Image();
     this.image.src = "../assets/player2.png";
     this.throwImage = new Image();
@@ -16,28 +16,24 @@ class Player {
     this.opacity = 1;
     this.lives = 5;
     this.masterballs = 3;
-
-    this.image.onload = () => {
-      this.ready = true;
-    };
-    this.throwImage.onload = () => {
-      this.throwReady = true;
-    };
   }
 
   draw(ctx) {
-    if (this.ready && this.throwReady) {
-      ctx.globalAlpha = this.opacity;
-      return ctx.drawImage(
-        this.currentImage,
-        this.x,
-        this.y,
-        this.width,
-        this.height
-      );
-    }
+    ctx.globalAlpha = this.opacity;
+    ctx.beginPath();
+    ctx.ellipse(
+      this.x + this.width / 2,
+      this.y + this.height,
+      this.width / 4,
+      10,
+      0,
+      0,
+      2 * Math.PI
+    );
+    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
+    ctx.fill();
+    ctx.drawImage(this.currentImage, this.x, this.y, this.width, this.height);
   }
-
 
   move(direction) {
     const topBoundary = 85;

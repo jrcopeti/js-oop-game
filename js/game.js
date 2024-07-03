@@ -344,11 +344,13 @@ class Game {
 
   endGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clearInterval(this.interval);
+    clearInterval(this.specialInterval);
+    this.gameOver = true;
     canvas.style.display = "none";
     interScreen.style.display = "none";
     gameEndScreen.style.display = "block";
     scoreDisplay.innerHTML = `Your Score: ${this.score}`;
-    this.gameOver = true;
   }
 }
 

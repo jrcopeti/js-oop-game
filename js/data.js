@@ -120,7 +120,7 @@ const levels = [
   {
     level: "1",
     background: "../assets/background/mount-background.png",
-    maxCount: 10,
+    maxCount: 20,
     rate: 1000,
     speed: 2,
     specialRate: 10000,
@@ -184,10 +184,10 @@ const levels = [
   {
     level: "8",
     background: "../assets/background/stadium.png",
-    maxCount: 150,
-    rate: 200,
-    speed: 10,
-    specialRate: 500,
+    maxCount: 5000,
+    rate: 10,
+    speed: 2,
+    specialRate: 200,
     specialSpeed: 15,
   },
 ];

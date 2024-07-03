@@ -7,20 +7,27 @@ class Pokemon {
       85,
       Math.floor(Math.random() * (canvas.height - this.height))
     );
-    this.speed = 3 ;
+    this.speed = 3;
     this.score = score;
-    this.name = name
+    this.name = name;
     this.image = new Image();
     this.image.src = imgSrc;
-    this.image.onload = () => {
-      this.ready = true;
-    };
   }
 
   draw(ctx) {
-    if (this.ready) {
-      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
+    ctx.beginPath();
+    ctx.ellipse(
+      this.x + this.width / 2,
+      this.y + this.height,
+      this.width / 4,
+      10,
+      0,
+      0,
+      2 * Math.PI
+    );
+    ctx.fillStyle = "rgba(0, 0, 0, 0.25)"; 
+    ctx.fill();
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   move() {
