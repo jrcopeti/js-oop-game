@@ -24,16 +24,13 @@ h1 {
 }
 
 .intro-screen {
-  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
 }
 
 .intro-img {
   width: 100%;
-  height: auto;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  position: absolute;
+  height: 100%;
   z-index: 999;
 }
 
@@ -90,6 +87,8 @@ h1 {
   background-size: cover;
   background-position: center;
   text-align: center;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 .inter-screen h2 {
