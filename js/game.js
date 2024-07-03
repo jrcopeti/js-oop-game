@@ -178,10 +178,12 @@ class Game {
               this.player.hit();
               break;
             case "Mewtwo":
+            case "Lugia":
               this.player.gainMasterball();
               this.score += pokemon.score;
               break;
             case "Mew":
+            case "Ho-oh":
               this.player.gainLife();
               this.score += pokemon.score;
               break;
