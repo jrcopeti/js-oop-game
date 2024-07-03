@@ -61,7 +61,8 @@ h1 {
   z-index: 999;
 }
 
-#start-button {
+#start-button,
+#play-button {
   background-color: #f4c542;
   color: #fff;
   font-size: 1.5rem;
@@ -85,8 +86,17 @@ h1 {
 
 .inter-screen {
   padding: 1rem 0rem;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url("/assets/interbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
   text-align: center;
+}
+
+.inter-screen h2 {
+  font-size: 2rem;
+  color: #fff;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
 }
 
 .pokemon-section,
@@ -112,6 +122,21 @@ h1 {
 .control-container img {
   width: auto;
   height: 50px;
+}
+
+.control-container,
+.pokemon-container,
+.rare-container,
+.enemy-container p {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fafafa;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.heart {
+  width: 30px;
+  height: auto;
 }
 
 #game-end {
