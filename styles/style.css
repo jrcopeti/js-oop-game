@@ -39,26 +39,36 @@ h1 {
   width: 50%;
   height: auto;
   left: 50%;
-  top: 50%;
-  transform: translate(-50%, -25%);
+  top: 65%;
+  transform: translate(-50%, -50%);
   position: absolute;
   z-index: 999;
   position: absolute;
 }
 
 .start-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   position: absolute;
-  top: 50%;
+  top: 20%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
-
 }
 
+.start-button {
+  background-color: #f4c542;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.start-button:hover {
+  background-color: #ecb10f;
+}
 
 #game-intro {
   display: block;
