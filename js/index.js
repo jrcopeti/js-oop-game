@@ -9,6 +9,8 @@ const startButton = document.getElementById("start-button");
 const playButton = document.getElementById("play-button");
 const restartButton = document.getElementById("restart-button");
 
+const scoreDisplay = document.getElementById("score");
+
 window.onload = () => {
   function startGame() {
     startScreen.style.display = "none";

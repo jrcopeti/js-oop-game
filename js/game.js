@@ -333,6 +333,7 @@ class Game {
     canvas.style.display = "none";
     interScreen.style.display = "none";
     gameEndScreen.style.display = "block";
+    scoreDisplay.innerHTML = `Your Score: ${this.score}`;
     this.gameOver = true;
   }
 }
