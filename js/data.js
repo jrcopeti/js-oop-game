@@ -38,7 +38,10 @@ const pokemonData = [
   },
   { name: "Eevee", imageSrc: "../assets/pokemon/eevee.png", score: 100 },
   { name: "Psyduck", imageSrc: "../assets/pokemon/psyduck.png", score: 150 },
-  { name: "Magikarp", imageSrc: "../assets/pokemon/magikarp.png", score: 20 },
+  { name: "Magikarp", imageSrc: "../assets/pokemon/magikarp.png", score: 50 },
+  { name: "Goldeen", imageSrc: "../assets/pokemon/goldeen.png", score: 50 },
+  { name: "Caterpie", imageSrc: "../assets/pokemon/caterpie.png", score: 50 },
+  { name: "Snorlax", imageSrc: "../assets/pokemon/snorlax.png", score: 150 },
   // enemy pokemon
   { name: "Ekans", imageSrc: "../assets/pokemon/ekans.png", score: 300 },
   { name: "Koffing", imageSrc: "../assets/pokemon/koffing.png", score: 300 },
@@ -55,23 +58,23 @@ const specialPokemonData = [
   {
     name: "Entei",
     imageSrc: "../assets/special-pokemon/entei.png",
-    score: 500,
+    score: 1000,
   },
   {
     name: "Ho-oh",
     imageSrc: "../assets/special-pokemon/ho-oh.png",
     score: 500,
   },
-  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 200 },
+  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 500 },
   {
     name: "Mewtwo",
     imageSrc: "../assets/special-pokemon/mewtwo.png",
-    score: 200,
+    score: 500,
   },
   {
     name: "Dragonite",
     imageSrc: "../assets/special-pokemon/dragonite.png",
-    score: 800,
+    score: 100,
   },
   {
     name: "Lugia",
@@ -79,6 +82,21 @@ const specialPokemonData = [
     score: 500,
   },
   { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 0 },
+  {
+    name: "Blastoise",
+    imageSrc: "../assets/special-pokemon/blastoise.png",
+    score: 0,
+  },
+  {
+    name: "Charizard",
+    imageSrc: "../assets/special-pokemon/charizard.png",
+    score: 500,
+  },
+  {
+    name: "Venosaur",
+    imageSrc: "../assets/special-pokemon/venosaur.png",
+    score: 500,
+  },
 
   // enemy pokemon
   {
@@ -113,7 +131,7 @@ const levels = [
     level: "2",
     background: "../assets/background/cave.png",
     maxCount: 10,
-    rate: 900,
+    rate: 800,
     speed: 3,
     specialRate: 10000,
     specialSpeed: 5,
@@ -140,8 +158,8 @@ const levels = [
     level: "5",
     background: "../assets/background/kyo.png",
     maxCount: 10,
-    rate: 200,
-    speed: 3,
+    rate: 100,
+    speed: 2,
     specialRate: 10000,
     specialSpeed: 15,
   },

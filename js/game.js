@@ -8,8 +8,8 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
-    this.lifeScoreBonus = 3000;
-    this.masterballScoreBonus = 2000;
+    this.lifeScoreBonus = 1000;
+    this.masterballScoreBonus = 750;
     this.heart = new Image();
     this.heart.src = "../assets/heart.png";
     this.masterball = new Image();
@@ -18,6 +18,8 @@ class Game {
     this.background = new Image();
     this.background.src = levels[this.currentLevel].background;
     this.pokemonCount = 0;
+    this.interval = null;
+    this.specialInterval = null;
     this.controls();
     this.showPokemon();
     this.showSpecialPokemon();
@@ -100,7 +102,10 @@ class Game {
   }
 
   showPokemon() {
-    setInterval(() => {
+    if (this.interval) {
+      clearInterval(this.interval);
+    }
+    this.interval = setInterval(() => {
       const randomPokemon = this.getRandomPokemon();
       const pokemon = new Pokemon(
         canvas,
@@ -114,7 +119,10 @@ class Game {
   }
 
   showSpecialPokemon() {
-    setInterval(() => {
+    if (this.specialInterval) {
+      clearInterval(this.specialInterval);
+    }
+    this.specialInterval = setInterval(() => {
       const randomSpecialPokemon = this.getRandomPokemon(true);
       const specialPokemon = new Pokemon(
         canvas,
@@ -179,15 +187,18 @@ class Game {
               break;
             case "Mewtwo":
             case "Lugia":
+            case "Charizard":
               this.player.gainMasterball();
               this.score += pokemon.score;
               break;
             case "Mew":
             case "Ho-oh":
+            case "Venosaur":
               this.player.gainLife();
               this.score += pokemon.score;
               break;
             case "Jynx":
+            case "Blastoise":
               this.defeatAllPokemon();
               this.score += pokemon.score;
             default:
@@ -230,12 +241,12 @@ class Game {
   }
 
   flashScreen() {
-    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     setTimeout(() => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       this.start();
-    }, 500);
+    }, 800);
   }
 
   levelUp() {
@@ -247,21 +258,24 @@ class Game {
       this.pokemonCount = 0;
       this.pokemonArr = [];
       this.flashScreen();
+      // this.player.hit();
       this.background.src = levels[this.currentLevel].background;
+      this.showPokemon();
+      this.showSpecialPokemon();
     }
   }
 
   lifeBonus() {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScoreBonus += 3000;
+      this.lifeScoreBonus += 1000;
     }
   }
 
   masterballBonus() {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
-      this.masterballScoreBonus += 2000;
+      this.masterballScoreBonus += 750;
     }
   }
 
