@@ -101,7 +101,7 @@ const specialPokemonData = [
 const levels = [
   {
     level: "1",
-    background: "../assets/background/mount-background.png",
+    background: "../assets/background/kyo.png",
     maxCount: 30,
     rate: 1000,
     speed: 2,

@@ -1,4 +1,3 @@
-
 class Game {
   constructor() {
     this.gameOver = false;
@@ -20,13 +19,13 @@ class Game {
     this.background.src = levels[this.currentLevel].background;
     this.pokemonCount = 0;
     this.controls();
-    this.spawnPokemon();
-    this.spawnSpecialPokemon();
+    this.showPokemon();
+    this.showSpecialPokemon();
   }
 
   start() {
     startScreen.style.display = "none";
-    gameEndScreen.style.display = "none";
+    interScreen.style.display = "none";
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
@@ -100,7 +99,7 @@ class Game {
     });
   }
 
-  spawnPokemon() {
+  showPokemon() {
     setInterval(() => {
       const randomPokemon = this.getRandomPokemon();
       const pokemon = new Pokemon(
@@ -114,7 +113,7 @@ class Game {
     }, levels[this.currentLevel].rate);
   }
 
-  spawnSpecialPokemon() {
+  showSpecialPokemon() {
     setInterval(() => {
       const randomSpecialPokemon = this.getRandomPokemon(true);
       const specialPokemon = new Pokemon(
@@ -330,6 +329,7 @@ class Game {
   endGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     canvas.style.display = "none";
+    interScreen.style.display = "none";
     gameEndScreen.style.display = "block";
     this.gameOver = true;
   }

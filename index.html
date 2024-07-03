@@ -6,34 +6,38 @@
     <link rel="stylesheet" href="./styles/style.css" />
 
     <title>Catch the Pokémons</title>
-    <style>
-      canvas {
-        display: block;
-        margin: 0 auto;
-        /* background: url("./assets/background/safron.png"); */
-        background-size: cover;
-        overflow: hidden;
-      }
-    </style>
+    <style></style>
   </head>
   <body>
     <main>
       <!-- #game-intro is initially shown on the game start screen -->
       <div id="game-intro">
-        <img src="./images/logo.png" alt="" class="logo-img" />
-        <br />
-        <button id="start-button">Start Game</button>
-        <p>Use the left and right arrow to control the car!</p>
-        <img src="./images/arrows.png" alt="" class="arrows-img" />
+        <div class="intro-screen">
+          <img src="/assets/intro.png" alt="" class="intro-img" />
+          <img src="/assets/logo.png" alt="" class="logo-img" />
+          <img src="/assets/logo2.jpg" alt="" class="logo-img" />
+          <h1>Catch them all</h1>
+          <br />
+          <section class="start-section">
+            <button id="start-button">Start Game</button>
+            <p>Use the left and right arrow to control the car!</p>
+            <img src="./images/arrows.png" alt="" class="arrows-img" />
+          </section>
+        </div>
+      </div>
+
+      <div id="game-inter">
+        THIS IS A GAME INTER
+        <button id="play-button">Play Game</button>
+
       </div>
 
       <canvas id="gameCanvas" width="800" height="600"></canvas>
 
-
       <!-- #game-end is initially hidden using CSS style display: none -->
       <div id="game-end">
         <!-- <img src="./images/logo.png" alt="" class="logo-img" /> -->
-        <h1>Game Over</h1>
+        <h2>Game Over</h2>
         <br />
         <button id="restart-button">Restart</button>
       </div>
