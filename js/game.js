@@ -71,16 +71,29 @@ class Game {
 
       switch (key) {
         case "ArrowUp":
+          if (this.pause) {
+            return;
+          }
           this.player.move("up");
           break;
         case "ArrowDown":
+          if (this.pause) {
+            return;
+          }
           this.player.move("down");
           break;
         case " ":
+          if (this.pause) {
+            return;
+          }
           const pokeball = this.player.throw();
           this.pokeballArr.push(pokeball);
           break;
         case "m":
+          if (this.pause) {
+            console.log("Game paused in controls");
+            return;
+          }
           const used = this.player.useMasterball();
           if (used) {
             this.defeatAllPokemon();
