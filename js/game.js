@@ -1,7 +1,5 @@
 class Game {
   constructor() {
-    this.gameOver = false;
-
     this.player = new Player(canvas);
     this.pokeballArr = [];
     this.pokemonArr = [];
@@ -20,12 +18,26 @@ class Game {
     this.pokemonCount = 0;
     this.interval = null;
     this.specialInterval = null;
+    this.pause = false;
+    this.gameOver = false;
     this.controls();
     this.showPokemon();
     this.showSpecialPokemon();
   }
 
   start() {
+    if (this.pause) {
+      return;
+    }
+
+    if (this.player.lives <= 0) {
+      this.endGame();
+    }
+
+    if (this.gameOver) {
+      return;
+    }
+
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     startScreen.style.display = "none";
     interScreen.style.display = "none";
@@ -44,9 +56,7 @@ class Game {
     this.masterballBonus();
     this.levelUp();
 
-    if (this.player.lives <= 0) {
-      this.endGame();
-    }
+
   }
 
   controls() {
@@ -55,7 +65,7 @@ class Game {
 
   handleKeydown(e) {
     const key = e.key;
-    const possibleKeys = ["ArrowUp", "ArrowDown", " ", "m"];
+    const possibleKeys = ["ArrowUp", "ArrowDown", " ", "m", "Enter"];
     if (possibleKeys.includes(key)) {
       e.preventDefault();
 
@@ -75,6 +85,10 @@ class Game {
           if (used) {
             this.defeatAllPokemon();
           }
+          break;
+        case "Enter":
+          this.pause = !this.pause;
+          break;
       }
     }
   }
@@ -257,10 +271,15 @@ class Game {
       this.pokemonCount = 0;
       this.pokemonArr = [];
       this.flashScreen();
-      // this.player.hit();
       this.background.src = levels[this.currentLevel].background;
       this.showPokemon();
       this.showSpecialPokemon();
+    } else if (
+      this.currentLevel === levels.length - 1 &&
+      this.pokemonCount >= levels[this.currentLevel].maxCount
+    ) {
+      this.flashScreen();
+      this.finalGame();
     }
   }
 
@@ -342,14 +361,25 @@ class Game {
   }
 
   endGame() {
+    this.gameOver = true;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(this.interval);
     clearInterval(this.specialInterval);
-    this.gameOver = true;
     canvas.style.display = "none";
-    interScreen.style.display = "none";
-    gameEndScreen.style.display = "block";
-    scoreDisplay.innerHTML = `Your Score: ${this.score}`;
+    endScreen.style.display = "block";
+    scoreDisplay.innerText = `Your Score: ${this.score}`;
+    console.log("endGame called");
+  }
+
+  finalGame() {
+    this.gameOver = true;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    clearInterval(this.interval);
+    clearInterval(this.specialInterval);
+    canvas.style.display = "none";
+    finalScreen.style.display = "block";
+    finalScoreDisplay.innerText = `Your Score: ${this.score}`;
+    console.log("finalGame called");
   }
 }
 

@@ -120,7 +120,7 @@ const levels = [
   {
     level: "1",
     background: "../assets/background/mount-background.png",
-    maxCount: 20,
+    maxCount: 1,
     rate: 1000,
     speed: 2,
     specialRate: 10000,
@@ -130,7 +130,7 @@ const levels = [
   {
     level: "2",
     background: "../assets/background/cave.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 800,
     speed: 3,
     specialRate: 10000,
@@ -139,7 +139,7 @@ const levels = [
   {
     level: "3",
     background: "../assets/background/veridian.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 1000,
     speed: 6,
     specialRate: 10000,
@@ -148,7 +148,7 @@ const levels = [
   {
     level: "4",
     background: "../assets/background/mirage-island.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 800,
     speed: 6,
     specialRate: 5000,
@@ -157,7 +157,7 @@ const levels = [
   {
     level: "5",
     background: "../assets/background/kyo.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 100,
     speed: 2,
     specialRate: 10000,
@@ -166,7 +166,7 @@ const levels = [
   {
     level: "6",
     background: "../assets/background/safron.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 1000,
     speed: 10,
     specialRate: 15000,
@@ -175,7 +175,7 @@ const levels = [
   {
     level: "7",
     background: "../assets/background/ice.png",
-    maxCount: 10,
+    maxCount: 1,
     rate: 200,
     speed: 10,
     specialRate: 15000,
@@ -184,7 +184,7 @@ const levels = [
   {
     level: "8",
     background: "../assets/background/stadium.png",
-    maxCount: 5000,
+    maxCount: 1,
     rate: 10,
     speed: 2,
     specialRate: 200,
