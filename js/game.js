@@ -26,10 +26,9 @@ class Game {
   }
 
   start() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     startScreen.style.display = "none";
     interScreen.style.display = "none";
-
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
     this.player.draw(ctx);
     this.updatePokeballs();

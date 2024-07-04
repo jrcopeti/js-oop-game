@@ -81,8 +81,8 @@ h1 {
 
 .inter-screen,
 .end-screen {
-  padding: 1rem 0rem;
-  background-image: url("/assets/interbg.png");
+  padding: 3rem 0rem 8rem 0rem;
+  background-image: url("/assets/interbg2.jpg");
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
