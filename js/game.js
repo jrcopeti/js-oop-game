@@ -159,6 +159,74 @@ class Game {
     return this.pokemonData[randomIndex];
   }
 
+  // checkCollision() {
+  //   this.pokeballArr.forEach((pokeball, pokeballIndex) => {
+  //     this.pokemonArr.forEach((pokemon, pokemonIndex) => {
+  //       if (
+  //         pokeball.x < pokemon.x + pokemon.width &&
+  //         pokeball.x + pokeball.width > pokemon.x &&
+  //         pokeball.y < pokemon.y + pokemon.height &&
+  //         pokeball.y + pokeball.height > pokemon.y
+  //       ) {
+  //         console.log("Collision detected with", pokemon.name);
+  //         pokemon.image.src = "../assets/capture.png";
+  //         pokemon.speed = 0;
+  //         this.pokeballArr.splice(pokeballIndex, 1);
+  //         this.pokemonArr.splice(pokemonIndex, 1);
+
+  //         switch (pokemon.name) {
+  //           case "Weezing":
+  //           case "Arbok":
+  //             enemyAudio.play();
+  //             if (this.player.masterballs > 0) {
+  //               this.player.loseMasterball();
+  //             }
+  //             this.score -= pokemon.score;
+  //             this.flashScreen();
+  //             break;
+  //           case "Ekans":
+  //           case "Koffing":
+  //           case "Kadabra":
+  //             enemyAudio.play();
+  //             this.score -= pokemon.score;
+  //             this.flashScreen();
+  //             break;
+  //           case "Gengar":
+  //           case "Gastly":
+  //             enemyAudio.play();
+  //             this.score -= pokemon.score;
+  //             this.player.loseLife();
+  //             this.player.hit();
+  //             break;
+  //           case "Mewtwo":
+  //           case "Lugia":
+  //           case "Charizard":
+  //             this.player.gainMasterball();
+  //             this.score += pokemon.score;
+  //             break;
+  //           case "Mew":
+  //           case "Ho-oh":
+  //           case "Venosaur":
+  //             this.player.gainLife();
+  //             this.score += pokemon.score;
+  //             break;
+  //           case "Jynx":
+  //           case "Blastoise":
+  //             this.defeatAllPokemon();
+  //             this.score += pokemon.score;
+  //           default:
+  //             this.score += pokemon.score;
+  //             captureAudio.play();
+  //             break;
+  //         }
+
+  //         this.pokemonCount += 1;
+  //         console.log("Pokemon count after increment:", this.pokemonCount);
+  //       }
+  //     });
+  //   });
+  // }
+
   checkCollision() {
     this.pokeballArr.forEach((pokeball, pokeballIndex) => {
       this.pokemonArr.forEach((pokemon, pokemonIndex) => {
@@ -169,34 +237,43 @@ class Game {
           pokeball.y + pokeball.height > pokemon.y
         ) {
           console.log("Collision detected with", pokemon.name);
-          pokemon.image.src = "../assets/capture.png";
-          pokemon.speed = 0;
-          this.pokeballArr.splice(pokeballIndex, 1);
-          setTimeout(() => {
-            this.pokemonArr.splice(pokemonIndex, 1);
-          }, 100);
+          pokemon.captured();
+          this.pokeballArr.splice(pokeballIndex, 1); // Remove pokeball immediately
 
           switch (pokemon.name) {
             case "Weezing":
             case "Arbok":
               enemyAudio.play();
-              if (this.player.masterballs > 0) {
-                this.player.loseMasterball();
-              }
-              this.score -= pokemon.score;
+              this.player.masterballs > 0 ? this.player.loseMasterball() : null;
+              this.pokemonCount > 0
+                ? (this.pokemonCount -= 1)
+                : (this.pokemonCount = 0);
+              this.score - pokemon.score >= 0
+                ? (this.score -= pokemon.score)
+                : (this.score = 0);
               this.flashScreen();
               break;
             case "Ekans":
             case "Koffing":
             case "Kadabra":
               enemyAudio.play();
-              this.score -= pokemon.score;
+              this.pokemonCount > 0
+                ? (this.pokemonCount -= 1)
+                : (this.pokemonCount = 0);
+              this.score - pokemon.score >= 0
+                ? (this.score -= pokemon.score)
+                : (this.score = 0);
               this.flashScreen();
               break;
             case "Gengar":
             case "Gastly":
               enemyAudio.play();
-              this.score -= pokemon.score;
+              this.pokemonCount > 0
+                ? (this.pokemonCount -= 1)
+                : (this.pokemonCount = 0);
+              this.score - pokemon.score >= 0
+                ? (this.score -= pokemon.score)
+                : (this.score = 0);
               this.player.loseLife();
               this.player.hit();
               break;
@@ -219,14 +296,15 @@ class Game {
             default:
               this.score += pokemon.score;
               captureAudio.play();
+              this.pokemonCount += 1;
               break;
           }
-
-          this.pokemonCount += 1;
-          console.log("Pokemon count after increment:", this.pokemonCount);
         }
       });
     });
+    this.pokemonArr = this.pokemonArr.filter(
+      (pokemon) => pokemon.state !== "remove"
+    );
   }
 
   checkPlayerCollision() {
@@ -254,7 +332,6 @@ class Game {
       this.pokemonCount += 1;
       this.score += pokemon.score;
       setTimeout(() => {
-        // this.pokemonArr.splice(index, 1);
         this.pokemonArr = [];
       }, 100);
       console.log("Pokemon count after increment:", this.pokemonCount);

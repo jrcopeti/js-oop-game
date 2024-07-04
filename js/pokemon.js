@@ -12,6 +12,7 @@ class Pokemon {
     this.name = name;
     this.image = new Image();
     this.image.src = imgSrc;
+    this.state = "active";
   }
 
   draw(ctx) {
@@ -25,12 +26,22 @@ class Pokemon {
       0,
       2 * Math.PI
     );
-    ctx.fillStyle = "rgba(0, 0, 0, 0.25)"; 
+    ctx.fillStyle = "rgba(0, 0, 0, 0.25)";
     ctx.fill();
     ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   move() {
     this.x -= this.speed;
+  }
+
+  captured() {
+    captureAudio.play(); // Play capture
+    this.image.src = "../assets/capture.png"; // Change to capture image
+    this.speed = 0; // Stop the Pokemon from moving
+    this.state = "captured"; // Update state to captured
+    setTimeout(() => {
+      this.state = "remove"; // Schedule removal
+    }, 100); // Delay before marking for removal to allow image display
   }
 }
