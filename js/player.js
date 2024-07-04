@@ -53,6 +53,8 @@ class Player {
     setTimeout(() => {
       this.currentImage = this.image;
     }, 200);
+    throwAudio.play();
+
     return pokeball;
   }
 

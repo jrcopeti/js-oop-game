@@ -14,6 +14,14 @@ const restartFinalButton = document.getElementById("restart-final-button");
 const scoreDisplay = document.getElementById("score");
 const finalScoreDisplay = document.getElementById("final-score");
 
+const captureAudio = new Audio("../assets/audio/capture2.wav");
+const throwAudio = new Audio("../assets/audio/throw2.mp3 ");
+const levelUpAudio = new Audio("../assets/audio/levelup.wav");
+const gameOverAudio = new Audio("../assets/audio/gameover.wav");
+const heartAudio = new Audio("../assets/audio/heart.wav");
+const gainMasterballAudio = new Audio("../assets/audio/masterball.wav");
+const useMasterballAudio = new Audio("../assets/audio/usemasterball.wav");
+
 window.onload = () => {
   function startGame() {
     // endScreen.style.display = "none";
@@ -31,8 +39,7 @@ window.onload = () => {
     const game = new Game();
     const interval = setInterval(() => {
       game.start();
-      console.log("gameOver", game.gameOver);
-      console.log("gameWon,", game.gameWon);
+
       if (game.gameOver) {
         clearInterval(interval);
       }

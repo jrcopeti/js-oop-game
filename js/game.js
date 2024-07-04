@@ -31,6 +31,7 @@ class Game {
     }
 
     if (this.player.lives <= 0) {
+      gameOverAudio.play();
       this.endGame();
     }
 
@@ -55,8 +56,6 @@ class Game {
     this.lifeBonus();
     this.masterballBonus();
     this.levelUp();
-
-
   }
 
   controls() {
@@ -134,18 +133,18 @@ class Game {
   showSpecialPokemon() {
     if (this.specialInterval) {
       clearInterval(this.specialInterval);
-    }
-    this.specialInterval = setInterval(() => {
-      const randomSpecialPokemon = this.getRandomPokemon(true);
-      const specialPokemon = new Pokemon(
-        canvas,
-        randomSpecialPokemon.imageSrc,
-        randomSpecialPokemon.score,
-        randomSpecialPokemon.name
-      );
-      specialPokemon.speed = levels[this.currentLevel].specialSpeed;
-      this.pokemonArr.push(specialPokemon);
-    }, levels[this.currentLevel].specialRate);
+    } else
+      this.specialInterval = setInterval(() => {
+        const randomSpecialPokemon = this.getRandomPokemon(true);
+        const specialPokemon = new Pokemon(
+          canvas,
+          randomSpecialPokemon.imageSrc,
+          randomSpecialPokemon.score,
+          randomSpecialPokemon.name
+        );
+        specialPokemon.speed = levels[this.currentLevel].specialSpeed;
+        this.pokemonArr.push(specialPokemon);
+      }, levels[this.currentLevel].specialRate);
   }
 
   getRandomPokemon(special = false) {
@@ -169,7 +168,6 @@ class Game {
           pokeball.y + pokeball.height > pokemon.y
         ) {
           console.log("Collision detected with", pokemon.name);
-
           pokemon.image.src = "../assets/capture.png";
           pokemon.speed = 0;
           this.pokeballArr.splice(pokeballIndex, 1);
@@ -203,12 +201,14 @@ class Game {
             case "Charizard":
               this.player.gainMasterball();
               this.score += pokemon.score;
+              gainMasterballAudio.play();
               break;
             case "Mew":
             case "Ho-oh":
             case "Venosaur":
               this.player.gainLife();
               this.score += pokemon.score;
+              heartAudio.play();
               break;
             case "Jynx":
             case "Blastoise":
@@ -218,6 +218,7 @@ class Game {
               this.score += pokemon.score;
               break;
           }
+          captureAudio.play();
           this.pokemonCount += 1;
           console.log("Pokemon count after increment:", this.pokemonCount); // Debugging
         }
@@ -241,16 +242,20 @@ class Game {
   }
 
   defeatAllPokemon() {
-    this.pokemonArr.forEach((pokemon) => {
+    useMasterballAudio.play();
+    this.pokemonArr.forEach((pokemon, index) => {
+      console.log("Defeating all Pokemon", pokemon.name);
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
-      setTimeout(() => {
-        this.pokemonArr = [];
-      }, 100);
-      this.score += pokemon.score;
+      this.flashScreen();
       this.pokemonCount += 1;
+      this.score += pokemon.score;
+      setTimeout(() => {
+        this.pokemonArr.splice(index, 1);
+        // this.pokemonArr = [];
+      }, 100);
+      console.log("Pokemon count after increment:", this.pokemonCount);
     });
-    this.flashScreen();
   }
 
   flashScreen() {
@@ -271,6 +276,7 @@ class Game {
       this.pokemonCount = 0;
       this.pokemonArr = [];
       this.flashScreen();
+      levelUpAudio.play();
       this.background.src = levels[this.currentLevel].background;
       this.showPokemon();
       this.showSpecialPokemon();
@@ -287,6 +293,7 @@ class Game {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
       this.lifeScoreBonus += 1000;
+      heartAudio.play();
     }
   }
 
@@ -294,6 +301,7 @@ class Game {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
       this.masterballScoreBonus += 750;
+      gainMasterballAudio.play();
     }
   }
 
