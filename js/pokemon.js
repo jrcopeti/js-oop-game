@@ -32,16 +32,17 @@ class Pokemon {
   }
 
   move() {
-    this.x -= this.speed;
+    if (this.state === "active") {
+      this.x -= this.speed;
+    }
   }
 
   captured() {
-    captureAudio.play(); // Play capture
-    this.image.src = "../assets/capture.png"; // Change to capture image
-    this.speed = 0; // Stop the Pokemon from moving
-    this.state = "captured"; // Update state to captured
+    captureAudio.play();
+    this.image.src = "../assets/capture.png";
+    this.speed = 0;
     setTimeout(() => {
-      this.state = "remove"; // Schedule removal
-    }, 100); // Delay before marking for removal to allow image display
+      this.state = "remove";
+    }, 100);
   }
 }
