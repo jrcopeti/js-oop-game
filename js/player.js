@@ -1,6 +1,3 @@
-// const canvas = document.getElementById("gameCanvas");
-// const ctx = canvas.getContext("2d");
-
 class Player {
   constructor(canvas) {
     this.width = 70;
@@ -72,6 +69,7 @@ class Player {
 
   gainMasterball() {
     this.masterballs += 1;
+    gainMasterballAudio.play();
   }
 
   loseMasterball() {
@@ -80,10 +78,12 @@ class Player {
 
   loseLife() {
     this.lives -= 1;
+    hitAudio.play();
   }
 
   gainLife() {
     this.lives += 1;
+    heartAudio.play();
   }
 
   hit() {

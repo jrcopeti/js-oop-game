@@ -56,10 +56,11 @@ class Game {
     this.lifeBonus();
     this.masterballBonus();
     this.levelUp();
+    console.log("Game started");
   }
 
   controls() {
-    window.addEventListener("keydown", this.handleKeydown.bind(this));
+    window.addEventListener("keydown", (e) => this.handleKeydown(e));
   }
 
   handleKeydown(e) {
@@ -133,18 +134,18 @@ class Game {
   showSpecialPokemon() {
     if (this.specialInterval) {
       clearInterval(this.specialInterval);
-    } else
-      this.specialInterval = setInterval(() => {
-        const randomSpecialPokemon = this.getRandomPokemon(true);
-        const specialPokemon = new Pokemon(
-          canvas,
-          randomSpecialPokemon.imageSrc,
-          randomSpecialPokemon.score,
-          randomSpecialPokemon.name
-        );
-        specialPokemon.speed = levels[this.currentLevel].specialSpeed;
-        this.pokemonArr.push(specialPokemon);
-      }, levels[this.currentLevel].specialRate);
+    }
+    this.specialInterval = setInterval(() => {
+      const randomSpecialPokemon = this.getRandomPokemon(true);
+      const specialPokemon = new Pokemon(
+        canvas,
+        randomSpecialPokemon.imageSrc,
+        randomSpecialPokemon.score,
+        randomSpecialPokemon.name
+      );
+      specialPokemon.speed = levels[this.currentLevel].specialSpeed;
+      this.pokemonArr.push(specialPokemon);
+    }, levels[this.currentLevel].specialRate);
   }
 
   getRandomPokemon(special = false) {
@@ -178,6 +179,7 @@ class Game {
           switch (pokemon.name) {
             case "Weezing":
             case "Arbok":
+              enemyAudio.play();
               if (this.player.masterballs > 0) {
                 this.player.loseMasterball();
               }
@@ -187,11 +189,13 @@ class Game {
             case "Ekans":
             case "Koffing":
             case "Kadabra":
+              enemyAudio.play();
               this.score -= pokemon.score;
               this.flashScreen();
               break;
             case "Gengar":
             case "Gastly":
+              enemyAudio.play();
               this.score -= pokemon.score;
               this.player.loseLife();
               this.player.hit();
@@ -201,14 +205,12 @@ class Game {
             case "Charizard":
               this.player.gainMasterball();
               this.score += pokemon.score;
-              gainMasterballAudio.play();
               break;
             case "Mew":
             case "Ho-oh":
             case "Venosaur":
               this.player.gainLife();
               this.score += pokemon.score;
-              heartAudio.play();
               break;
             case "Jynx":
             case "Blastoise":
@@ -216,11 +218,12 @@ class Game {
               this.score += pokemon.score;
             default:
               this.score += pokemon.score;
+              captureAudio.play();
               break;
           }
-          captureAudio.play();
+
           this.pokemonCount += 1;
-          console.log("Pokemon count after increment:", this.pokemonCount); // Debugging
+          console.log("Pokemon count after increment:", this.pokemonCount);
         }
       });
     });
@@ -251,8 +254,8 @@ class Game {
       this.pokemonCount += 1;
       this.score += pokemon.score;
       setTimeout(() => {
-        this.pokemonArr.splice(index, 1);
-        // this.pokemonArr = [];
+        // this.pokemonArr.splice(index, 1);
+        this.pokemonArr = [];
       }, 100);
       console.log("Pokemon count after increment:", this.pokemonCount);
     });
@@ -293,7 +296,6 @@ class Game {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
       this.lifeScoreBonus += 1000;
-      heartAudio.play();
     }
   }
 
@@ -301,7 +303,6 @@ class Game {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
       this.masterballScoreBonus += 750;
-      gainMasterballAudio.play();
     }
   }
 

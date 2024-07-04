@@ -21,20 +21,18 @@ const gameOverAudio = new Audio("../assets/audio/gameover.wav");
 const heartAudio = new Audio("../assets/audio/heart.wav");
 const gainMasterballAudio = new Audio("../assets/audio/masterball.wav");
 const useMasterballAudio = new Audio("../assets/audio/usemasterball.wav");
+const hitAudio = new Audio("../assets/audio/hit.wav");
+const enemyAudio = new Audio("../assets/audio/enemy.wav");
 
 window.onload = () => {
   function startGame() {
-    // endScreen.style.display = "none";
-    // finalScreen.style.display = "none";
     startScreen.style.display = "none";
     interScreen.style.display = "block";
   }
 
   function playGame() {
-    // startScreen.style.display = "none";
+
     interScreen.style.display = "none";
-    // endScreen.style.display = "none";
-    // finalScreen.style.display = "none";
     canvas.style.display = "block";
     const game = new Game();
     const interval = setInterval(() => {

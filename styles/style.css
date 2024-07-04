@@ -20,30 +20,31 @@ html {
 
 h1 {
   font-size: 3rem;
-  color: #fff;
+  color: #fafafa;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
   position: absolute;
   top: 78%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 999;
+  text-wrap: nowrap;
 }
 
 #game-intro {
   display: block;
-  overflow: hidden;
+
 }
 
 .intro-screen {
   height: 100dvh;
-  width: 100vw;
+  width: 100dvw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-image: url("/assets/intro.png");
 }
 
-.intro-img {
-  width: 100%;
-  height: 100%;
-  z-index: 999;
-}
+
 
 .logo-img {
   width: 50%;
