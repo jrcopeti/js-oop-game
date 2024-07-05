@@ -32,9 +32,7 @@ class Pokemon {
   }
 
   move() {
-    if (this.state === "active") {
-      this.x -= this.speed;
-    }
+    this.x -= this.speed;
   }
 
   captured() {

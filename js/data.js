@@ -184,7 +184,7 @@ const levels = [
   {
     level: "8",
     background: "../assets/background/stadium.png",
-    maxCount: 500,
+    maxCount: 5000,
     rate: 10,
     speed: 2,
     specialRate: 200,

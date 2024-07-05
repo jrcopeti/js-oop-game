@@ -20,7 +20,7 @@ const levelUpAudio = new Audio("../assets/audio/levelup.wav");
 const gameOverAudio = new Audio("../assets/audio/gameover.wav");
 const heartAudio = new Audio("../assets/audio/heart.wav");
 const gainMasterballAudio = new Audio("../assets/audio/masterball.wav");
-const useMasterballAudio = new Audio("../assets/audio/usemasterball.wav");
+const useMasterballAudio = new Audio("../assets/audio/explode.wav");
 const hitAudio = new Audio("../assets/audio/hit.wav");
 const enemyAudio = new Audio("../assets/audio/enemy.wav");
 

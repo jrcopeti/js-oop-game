@@ -6,8 +6,8 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
-    this.lifeScoreBonus = 1000;
-    this.masterballScoreBonus = 750;
+    this.lifeScoreBonus = 2000;
+    this.masterballScoreBonus = 1000;
     this.heart = new Image();
     this.heart.src = "../assets/heart.png";
     this.masterball = new Image();
@@ -56,7 +56,6 @@ class Game {
     this.lifeBonus();
     this.masterballBonus();
     this.levelUp();
-    console.log("Game started");
   }
 
   controls() {
@@ -91,7 +90,6 @@ class Game {
           break;
         case "m":
           if (this.pause) {
-            console.log("Game paused in controls");
             return;
           }
           const used = this.player.useMasterball();
@@ -122,6 +120,20 @@ class Game {
       pokemon.move();
       pokemon.draw(ctx);
       if (pokemon.x + pokemon.width < 0) {
+        switch (pokemon.name) {
+          case "Weezing":
+          case "Arbok":
+          case "Ekans":
+          case "Koffing":
+          case "Kadabra":
+          case "Gengar":
+          case "Gastly":
+            break;
+          default:
+            this.player.loseLife();
+            this.player.hit();
+        }
+
         this.pokemonArr.splice(index, 1);
       }
     });
@@ -146,7 +158,6 @@ class Game {
       pokemon.speed = levels[this.currentLevel].speed;
       this.pokemonArr.push(pokemon);
     }, levels[this.currentLevel].rate);
-    console.log("showPokemon called");
   }
 
   showSpecialPokemon() {
@@ -189,7 +200,7 @@ class Game {
           pokeball.y < pokemon.y + pokemon.height &&
           pokeball.y + pokeball.height > pokemon.y
         ) {
-          console.log("Collision detected with", pokemon.name);
+          console.log("caught", pokemon.name, "score:", pokemon.score);
           pokemon.captured();
           this.pokeballArr.splice(pokeballIndex, 1);
 
@@ -277,17 +288,46 @@ class Game {
 
   defeatAllPokemon() {
     useMasterballAudio.play();
-    this.pokemonArr.forEach((pokemon, index) => {
-      console.log("Defeating all Pokemon", pokemon.name);
+    this.pokemonArr.forEach((pokemon) => {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
       this.flashScreen();
-      this.pokemonCount += 1;
-      this.score += pokemon.score;
+      switch (pokemon.name) {
+        case "Weezing":
+        case "Arbok":
+        case "Ekans":
+        case "Koffing":
+        case "Kadabra":
+        case "Gengar":
+        case "Gastly":
+          this.score = this.score;
+          break;
+        case "Mewtwo":
+        case "Lugia":
+        case "Charizard":
+          this.player.gainMasterball();
+          this.score += pokemon.score;
+          break;
+        case "Mew":
+        case "Ho-oh":
+        case "Venosaur":
+          this.player.gainLife();
+          this.score += pokemon.score;
+          break;
+
+        default:
+          this.score += pokemon.score;
+          captureAudio.play();
+          this.pokemonCount += 1;
+          this.score += pokemon.score;
+          break;
+      }
+      console.log("Caught all pokémon", pokemon.name, "score:", pokemon.score);
       setTimeout(() => {
         this.pokemonArr = [];
       }, 100);
       console.log("Pokemon count after increment:", this.pokemonCount);
+      console.log("Score after increment:", this.score);
     });
   }
 
@@ -325,14 +365,14 @@ class Game {
   lifeBonus() {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScoreBonus += 1000;
+      this.lifeScoreBonus += 2000;
     }
   }
 
   masterballBonus() {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
-      this.masterballScoreBonus += 750;
+      this.masterballScoreBonus += 1000;
     }
   }
 
@@ -407,7 +447,6 @@ class Game {
     canvas.style.display = "none";
     endScreen.style.display = "block";
     scoreDisplay.innerText = `Your Score: ${this.score}`;
-    console.log("endGame called");
   }
 
   finalGame() {
@@ -418,6 +457,5 @@ class Game {
     canvas.style.display = "none";
     finalScreen.style.display = "block";
     finalScoreDisplay.innerText = `Your Score: ${this.score}`;
-    console.log("finalGame called");
   }
 }

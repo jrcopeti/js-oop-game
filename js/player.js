@@ -4,7 +4,7 @@ class Player {
     this.height = 70;
     this.x = 10;
     this.y = canvas.height / 2 - this.height / 2;
-    this.speed = 20;
+    this.speed = 40;
     this.image = new Image();
     this.image.src = "../assets/player2.png";
     this.throwImage = new Image();
