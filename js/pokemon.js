@@ -7,10 +7,10 @@ class Pokemon {
       85,
       Math.floor(Math.random() * (canvas.height - this.height))
     );
-    this.speed = 3;
+    this.speed = 0;
     this.score = score;
     this.name = name;
-    this.image = new Image();
+    this.image = document.createElement("img");
     this.image.src = imgSrc;
     this.state = "active";
   }

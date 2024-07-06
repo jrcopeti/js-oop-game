@@ -31,12 +31,10 @@ window.onload = () => {
   }
 
   function playGame() {
-
-    interScreen.style.display = "none";
-    canvas.style.display = "block";
     const game = new Game();
+    game.start();
     const interval = setInterval(() => {
-      game.start();
+      game.update();
 
       if (game.gameOver) {
         clearInterval(interval);

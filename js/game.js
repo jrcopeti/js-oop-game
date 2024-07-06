@@ -8,12 +8,12 @@ class Game {
     this.score = 0;
     this.lifeScoreBonus = 2000;
     this.masterballScoreBonus = 1000;
-    this.heart = new Image();
+    this.heart = document.createElement("img");
     this.heart.src = "../assets/heart.png";
-    this.masterball = new Image();
+    this.masterball = document.createElement("img");
     this.masterball.src = "../assets/masterball.png";
     this.currentLevel = 0;
-    this.background = new Image();
+    this.background = document.createElement("img");
     this.background.src = levels[this.currentLevel].background;
     this.pokemonCount = 0;
     this.interval = null;
@@ -26,7 +26,13 @@ class Game {
   }
 
   start() {
-    if (this.pause) {
+    interScreen.style.display = "none";
+    startScreen.style.display = "none";
+    canvas.style.display = "block";
+  }
+
+  update() {
+    if (this.pause || this.gameOver) {
       return;
     }
 
@@ -35,14 +41,9 @@ class Game {
       this.endGame();
     }
 
-    if (this.gameOver) {
-      return;
-    }
-
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    startScreen.style.display = "none";
-    interScreen.style.display = "none";
     ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
+
     this.player.draw(ctx);
     this.updatePokeballs();
     this.updatePokemon();
@@ -217,6 +218,7 @@ class Game {
                 : (this.score = 0);
               this.flashScreen();
               break;
+
             case "Ekans":
             case "Koffing":
             case "Kadabra":
@@ -229,6 +231,7 @@ class Game {
                 : (this.score = 0);
               this.flashScreen();
               break;
+
             case "Gengar":
             case "Gastly":
               enemyAudio.play();
@@ -241,22 +244,26 @@ class Game {
               this.player.loseLife();
               this.player.hit();
               break;
+
             case "Mewtwo":
             case "Lugia":
             case "Charizard":
               this.player.gainMasterball();
               this.score += pokemon.score;
               break;
+
             case "Mew":
             case "Ho-oh":
             case "Venosaur":
               this.player.gainLife();
               this.score += pokemon.score;
               break;
+
             case "Jynx":
             case "Blastoise":
               this.defeatAllPokemon();
               this.score += pokemon.score;
+
             default:
               this.score += pokemon.score;
               captureAudio.play();
@@ -300,8 +307,9 @@ class Game {
         case "Kadabra":
         case "Gengar":
         case "Gastly":
-          this.score = this.score;
+          // this.score = this.score;
           break;
+
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
@@ -316,10 +324,10 @@ class Game {
           break;
 
         default:
-          this.score += pokemon.score;
           captureAudio.play();
-          this.pokemonCount += 1;
           this.score += pokemon.score;
+          this.pokemonCount += 1;
+          // this.score += pokemon.score;
           break;
       }
       console.log("Caught all pokémon", pokemon.name, "score:", pokemon.score);
@@ -332,12 +340,8 @@ class Game {
   }
 
   flashScreen() {
-    ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+    ctx.fillStyle = "rgba(255, 255, 255, 1)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-    setTimeout(() => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      this.start();
-    }, 800);
   }
 
   levelUp() {

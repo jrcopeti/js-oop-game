@@ -5,14 +5,14 @@ class Player {
     this.x = 10;
     this.y = canvas.height / 2 - this.height / 2;
     this.speed = 40;
-    this.image = new Image();
+    this.image = document.createElement("img");
     this.image.src = "../assets/player2.png";
-    this.throwImage = new Image();
+    this.throwImage = document.createElement("img");
     this.throwImage.src = "../assets/player-throwing.png";
     this.currentImage = this.image;
     this.opacity = 1;
     this.lives = 5;
-    this.masterballs = 3;
+    this.masterballs = 10;
   }
 
   draw(ctx) {
@@ -74,6 +74,7 @@ class Player {
 
   loseMasterball() {
     this.masterballs -= 1;
+    
   }
 
   loseLife() {
