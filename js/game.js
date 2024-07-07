@@ -6,6 +6,7 @@ class Game {
     this.pokemonData = pokemonData;
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
+    this.scorePopups = [];
     this.lifeScoreBonus = 2000;
     this.masterballScoreBonus = 1000;
     this.heart = document.createElement("img");
@@ -49,6 +50,8 @@ class Game {
     this.updatePokemon();
     this.checkCollision();
     this.checkPlayerCollision();
+    this.drawScorePopups();
+    this.updateScorePopups();
     this.displayScore();
     this.displayLives();
     this.displayLevel();
@@ -204,6 +207,8 @@ class Game {
         ) {
           console.log("caught", pokemon.name, "score:", pokemon.score);
           pokemon.captured();
+          this.useScorePopup(pokemon);
+
           this.pokeballArr.splice(pokeballIndex, 1);
 
           switch (pokemon.name) {
@@ -379,6 +384,61 @@ class Game {
       this.player.gainMasterball();
       this.masterballScoreBonus += 1000;
     }
+  }
+
+  createScorePopup(x, y, score, color, image = null) {
+    if (image) {
+      const scorePopup = new ScorePopup(x, y, score, color, image);
+      this.scorePopups.push(scorePopup);
+    } else {
+      const scorePopup = new ScorePopup(x, y, score, color);
+      this.scorePopups.push(scorePopup);
+    }
+  }
+
+  useScorePopup(pokemon) {
+    let color;
+    let scoreValue;
+    let image;
+    switch (pokemon.name) {
+      case "Weezing":
+      case "Arbok":
+        color = "217, 30, 24";
+        scoreValue = -pokemon.score;
+        image = "../assets/masterball.png";
+        break;
+      case "Ekans":
+      case "Koffing":
+      case "Kadabra":
+        color = "217, 30, 24";
+        scoreValue = -pokemon.score;
+        break;
+      case "Gengar":
+      case "Gastly":
+        color = "217, 30, 24";
+        scoreValue = -pokemon.score;
+        image = "../assets/heart.png";
+        break;
+      default:
+        color = "4, 147, 114";
+        scoreValue = pokemon.score;
+        break;
+    }
+    this.createScorePopup(
+      pokemon.x + pokemon.width / 2,
+      pokemon.y,
+      scoreValue,
+      color,
+      image
+    );
+  }
+
+  drawScorePopups() {
+    this.scorePopups.forEach((popup) => popup.draw(ctx));
+  }
+
+  updateScorePopups() {
+    this.scorePopups = this.scorePopups.filter((popup) => !popup.isExpired());
   }
 
   displayScore() {

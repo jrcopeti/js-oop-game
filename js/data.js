@@ -74,7 +74,7 @@ const specialPokemonData = [
   {
     name: "Dragonite",
     imageSrc: "../assets/special-pokemon/dragonite.png",
-    score: 100,
+    score: 1000,
   },
   {
     name: "Lugia",
