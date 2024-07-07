@@ -18,13 +18,13 @@ class ScorePopup {
     ctx.fillText(
       `${this.score > 0 ? "+" : ""}${this.score}`,
       this.x,
-      this.y - elapsedTime * 0.02
+      this.y - elapsedTime * 0.03
     );
     this.image &&
       ctx.drawImage(
         this.image,
         this.x - 10,
-        this.y - elapsedTime * 0.02,
+        this.y - elapsedTime * 0.03,
         20,
         20
       );

@@ -435,42 +435,45 @@ class Game {
     let score;
     let image = null;
 
+    const green = "0, 182, 19";
+    const red = "217, 30, 24";
+
     if (!masterball) {
       switch (pokemon.name) {
         case "Weezing":
         case "Arbok":
-          color = "217, 30, 24";
+          color = red;
           score = -pokemon.score;
           image = "../assets/masterball.png";
           break;
         case "Ekans":
         case "Koffing":
         case "Kadabra":
-          color = "217, 30, 24";
+          color = red;
           score = -pokemon.score;
           break;
         case "Gengar":
         case "Gastly":
-          color = "217, 30, 24";
+          color = red;
           score = -pokemon.score;
           image = "../assets/heart.png";
           break;
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
-          color = "4, 147, 114";
+          color = green;
           score = pokemon.score;
           image = "../assets/masterball.png";
           break;
         case "Mew":
         case "Ho-oh":
         case "Venosaur":
-          color = "4, 147, 114";
+          color = green;
           score = pokemon.score;
           image = "../assets/heart.png";
           break;
         default:
-          color = "4, 147, 114";
+          color = green;
           score = pokemon.score;
           break;
       }
