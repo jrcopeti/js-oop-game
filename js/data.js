@@ -181,7 +181,7 @@ const levels = [
   {
     level: "7",
     background: "../assets/background/safron.png",
-    maxCount: 100,
+    maxCount: 70,
     rate: 1000,
     speed: 6,
     specialRate: 10000,
