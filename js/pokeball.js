@@ -5,7 +5,7 @@ class Pokeball {
     this.x = x;
     this.y = y;
     this.speed = 7;
-    this.image = new Image();
+    this.image = document.createElement("img");
     this.image.src = "../assets/pokeball-red.png";
     this.image.onload = () => {
       this.ready = true;
