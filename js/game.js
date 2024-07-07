@@ -351,34 +351,30 @@ class Game {
         case "Kadabra":
         case "Gengar":
         case "Gastly":
-          // this.score += pokemon.score;
           break;
 
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
-          this.player.gainMasterball();
-          // this.score += pokemon.score;
+          // this.player.gainMasterball();
           break;
+
         case "Mew":
         case "Ho-oh":
         case "Venosaur":
-          this.player.gainLife();
-          // this.score += pokemon.score;
+          // this.player.gainLife();
           break;
 
         default:
           captureAudio.play();
-          // this.score += pokemon.score;
           this.pokemonCount += 1;
           break;
       }
-      console.log("Caught all pokémon", pokemon.name, "score:", pokemon.score);
+      console.log("Caught all pokémon", pokemon.name);
+
       setTimeout(() => {
         this.pokemonArr = [];
       }, 100);
-      console.log("Pokemon count after increment:", this.pokemonCount);
-      console.log("Score after increment:", this.score);
     });
   }
 
@@ -437,72 +433,55 @@ class Game {
   useScorePopup(pokemon, masterball = false) {
     let color;
     let score;
-    let image;
-    switch (pokemon.name) {
-      case "Weezing":
-      case "Arbok":
-        if (!masterball) {
+    let image = null;
+
+    if (!masterball) {
+      switch (pokemon.name) {
+        case "Weezing":
+        case "Arbok":
           color = "217, 30, 24";
           score = -pokemon.score;
           image = "../assets/masterball.png";
-        } else {
-          color = "4, 147, 114";
-          score = pokemon.score;
-        }
-
-        break;
-      case "Ekans":
-      case "Koffing":
-      case "Kadabra":
-        if (!masterball) {
+          break;
+        case "Ekans":
+        case "Koffing":
+        case "Kadabra":
           color = "217, 30, 24";
           score = -pokemon.score;
-        } else {
-          color = "4, 147, 114";
-          score = pokemon.score;
-        }
-        break;
-
-      case "Gengar":
-      case "Gastly":
-        if (!masterball) {
+          break;
+        case "Gengar":
+        case "Gastly":
           color = "217, 30, 24";
           score = -pokemon.score;
           image = "../assets/heart.png";
-        } else {
+          break;
+        case "Mewtwo":
+        case "Lugia":
+        case "Charizard":
           color = "4, 147, 114";
           score = pokemon.score;
-        }
-        break;
-
-      case "Mewtwo":
-      case "Lugia":
-      case "Charizard":
-        color = "4, 147, 114";
-        score = pokemon.score;
-        image = "../assets/masterball.png";
-        break;
-
-      case "Mew":
-      case "Ho-oh":
-      case "Venosaur":
-        color = "4, 147, 114";
-        score = pokemon.score;
-        image = "../assets/heart.png";
-        break;
-
-      default:
-        color = "4, 147, 114";
-        score = pokemon.score;
-        break;
+          image = "../assets/masterball.png";
+          break;
+        case "Mew":
+        case "Ho-oh":
+        case "Venosaur":
+          color = "4, 147, 114";
+          score = pokemon.score;
+          image = "../assets/heart.png";
+          break;
+        default:
+          color = "4, 147, 114";
+          score = pokemon.score;
+          break;
+      }
+      this.createScorePopup(
+        pokemon.x + pokemon.width / 2,
+        pokemon.y,
+        score,
+        color,
+        image
+      );
     }
-    this.createScorePopup(
-      pokemon.x + pokemon.width / 2,
-      pokemon.y,
-      score,
-      color,
-      image
-    );
   }
 
   drawScorePopups() {
