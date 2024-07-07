@@ -186,7 +186,7 @@ const levels = [
     speed: 6,
     specialRate: 15000,
     specialSpeed: 5,
-    music: level6Music,
+    music: level7Music,
   },
   {
     level: "8",
