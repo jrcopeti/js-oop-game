@@ -29,8 +29,8 @@ const gameOverAudio = new Audio("../assets/audio/gameover.wav");
 const heartAudio = new Audio("../assets/audio/heart2.mp3");
 heartAudio.volume = sfxVol;
 
-// const gainMasterballAudio = new Audio("../assets/audio/masterball.wav");
-const gainMasterballAudio = new Audio("../assets/audio/masterball2.mp3");
+const gainMasterballAudio = new Audio("../assets/audio/masterball.wav");
+// const gainMasterballAudio = new Audio("../assets/audio/masterball2.mp3");
 gainMasterballAudio.volume = sfxVol;
 const useMasterballAudio = new Audio("../assets/audio/explode.wav");
 const hitAudio = new Audio("../assets/audio/hit.wav");
