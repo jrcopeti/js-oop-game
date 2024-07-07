@@ -188,15 +188,27 @@ const levels = [
     specialSpeed: 5,
     music: level7Music,
   },
+
   {
     level: "8",
+    background: "../assets/background/fire.png",
+    maxCount: 150,
+    rate: 1000,
+    speed: 5,
+    specialRate: 1000,
+    specialSpeed: 6,
+    music: level8Music,
+  },
+
+  {
+    level: "9",
     background: "../assets/background/stadium.png",
     maxCount: 5000,
     rate: 10,
     speed: 2,
     specialRate: 200,
     specialSpeed: 15,
-    music: level8Music,
+    music: level6Music,
   },
 ];
 

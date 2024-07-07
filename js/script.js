@@ -83,6 +83,9 @@ level7Music.src = "../assets/audio/music/level7.mp3";
 const level8Music = document.createElement("audio");
 level8Music.src = "../assets/audio/music/level8.mp3";
 
+const level9Music = document.createElement("audio");
+level9Music.src = "../assets/audio/music/level9.mp3";
+
 window.onload = () => {
   function startGame() {
     startScreen.style.display = "none";

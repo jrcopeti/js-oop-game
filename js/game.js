@@ -586,6 +586,7 @@ class Game {
     if (levels[this.currentLevel].music) {
       this.currentMusic = levels[this.currentLevel].music;
       this.currentMusic.volume = musicVol;
+      this.currentMusic.loop = true;
       this.currentMusic.play();
     }
   }
