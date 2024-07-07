@@ -23,7 +23,7 @@ class ScorePopup {
     this.image &&
       ctx.drawImage(
         this.image,
-        this.x - 20,
+        this.x - 10,
         this.y - elapsedTime * 0.02,
         20,
         20

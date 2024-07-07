@@ -173,7 +173,6 @@ class Game {
             this.player.hit();
         }
         pokemon.state = "remove";
-
         this.pokemonArr.filter((pokemon) => pokemon.state === "active");
       }
     });
@@ -241,7 +240,9 @@ class Game {
           pokeball.y + pokeball.height > pokemon.y
         ) {
           console.log("caught", pokemon.name, "score:", pokemon.score);
+
           pokemon.captured();
+
           this.useScorePopup(pokemon);
 
           this.pokeballArr.splice(pokeballIndex, 1);
@@ -302,6 +303,8 @@ class Game {
 
             case "Jynx":
             case "Blastoise":
+              useMasterballAudio.volume = sfxVol;
+              useMasterballAudio.play();
               this.defeatAllPokemon();
               this.score += pokemon.score;
 
@@ -348,25 +351,25 @@ class Game {
         case "Kadabra":
         case "Gengar":
         case "Gastly":
-          this.score += pokemon.score;
+          // this.score += pokemon.score;
           break;
 
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
           this.player.gainMasterball();
-          this.score += pokemon.score;
+          // this.score += pokemon.score;
           break;
         case "Mew":
         case "Ho-oh":
         case "Venosaur":
           this.player.gainLife();
-          this.score += pokemon.score;
+          // this.score += pokemon.score;
           break;
 
         default:
           captureAudio.play();
-          this.score += pokemon.score;
+          // this.score += pokemon.score;
           this.pokemonCount += 1;
           break;
       }
@@ -585,7 +588,6 @@ class Game {
       this.currentMusic.volume = musicVol;
       this.currentMusic.play();
     }
-
   }
 
   endGame() {

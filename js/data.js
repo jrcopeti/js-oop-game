@@ -81,11 +81,11 @@ const specialPokemonData = [
     imageSrc: "../assets/special-pokemon/lugia.png",
     score: 500,
   },
-  { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 0 },
+  { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 1000 },
   {
     name: "Blastoise",
     imageSrc: "../assets/special-pokemon/blastoise.png",
-    score: 0,
+    score: 1000,
   },
   {
     name: "Charizard",
@@ -155,7 +155,7 @@ const levels = [
     rate: 800,
     speed: 4,
     specialRate: 5000,
-    specialSpeed: 7,
+    specialSpeed: 6,
     music: level4Music,
   },
   {
@@ -175,7 +175,7 @@ const levels = [
     rate: 1000,
     speed: 6,
     specialRate: 15000,
-    specialSpeed: 10,
+    specialSpeed: 5,
     music: level6Music,
   },
   {
