@@ -12,7 +12,7 @@ class Player {
     this.currentImage = this.image;
     this.opacity = 1;
     this.lives = 5;
-    this.masterballs = 10;
+    this.masterballs = 3;
   }
 
   draw(ctx) {
