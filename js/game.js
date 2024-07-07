@@ -21,9 +21,11 @@ class Game {
     this.specialInterval = null;
     this.pause = false;
     this.gameOver = false;
+    this.currentMusic = null;
     this.controls();
     this.showPokemon();
     this.showSpecialPokemon();
+    this.playMusic();
   }
 
   start() {
@@ -333,7 +335,6 @@ class Game {
   }
 
   defeatAllPokemon() {
-    useMasterballAudio.play();
     this.pokemonArr.forEach((pokemon) => {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
@@ -396,6 +397,7 @@ class Game {
       levelUpAudio.play();
       this.showPokemon();
       this.showSpecialPokemon();
+      this.playMusic();
     } else if (
       this.currentLevel === levels.length - 1 &&
       this.pokemonCount >= levels[this.currentLevel].maxCount
@@ -570,6 +572,19 @@ class Game {
     ctx.fillRect(xPosition - 10, 40, textWidth + 30, 35);
     ctx.fillStyle = "white";
     ctx.fillText(text, xPosition, 65);
+  }
+
+  playMusic() {
+    if (this.currentMusic) {
+      this.currentMusic.pause();
+      this.currentMusic.currentTime = 0;
+    }
+
+    if (levels[this.currentLevel].music) {
+      this.currentMusic = levels[this.currentLevel].music;
+      this.currentMusic.volume = musicVol;
+      this.currentMusic.play();
+    }
   }
 
   endGame() {

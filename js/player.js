@@ -36,9 +36,7 @@ class Player {
     const topBoundary = 100;
     const bottomBoundary = canvas.height - this.height - 20;
     const leftBoundary = 10;
-    const rightBoundary = canvas.width - this.width - 30
-     ;
-
+    const rightBoundary = canvas.width - this.width - 30;
     if (direction === "up" && this.y > topBoundary) {
       this.y -= this.speed;
     } else if (direction === "down" && this.y < bottomBoundary) {
@@ -67,6 +65,8 @@ class Player {
   useMasterball() {
     if (this.masterballs > 0) {
       this.currentImage = this.throwImage;
+      useMasterballAudio.volume = sfxVol;
+      useMasterballAudio.play();
       this.masterballs -= 1;
       setTimeout(() => {
         this.currentImage = this.image;
