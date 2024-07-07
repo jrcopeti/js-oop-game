@@ -26,7 +26,7 @@ const throwAudio = document.createElement("audio");
 throwAudio.src = "../assets/audio/throw2.mp3";
 // const levelUpAudio = new Audio("../assets/audio/levelup2.mp3");
 const levelUpAudio = document.createElement("audio");
-levelUpAudio.src = "../assets/audio/levelup2.mp3";
+levelUpAudio.src = "../assets/audio/levelup.mp3";
 levelUpAudio.volume = musicVol;
 
 // const gameOverAudio = new Audio("../assets/audio/gameover.wav");
@@ -35,10 +35,8 @@ const gameOverAudio = document.createElement("audio");
 gameOverAudio.src = "../assets/audio/gameover.wav";
 gameOverAudio.volume = sfxVol;
 
-// const heartAudio = new Audio("../assets/audio/heart.wav");
-// const heartAudio = new Audio("../assets/audio/heart2.mp3");
 const heartAudio = document.createElement("audio");
-heartAudio.src = "../assets/audio/heart2.mp3";
+heartAudio.src = "../assets/audio/heart.mp3";
 heartAudio.volume = sfxVol;
 
 const gainMasterballAudio = document.createElement("audio");
@@ -85,6 +83,9 @@ level8Music.src = "../assets/audio/music/level8.mp3";
 
 const level9Music = document.createElement("audio");
 level9Music.src = "../assets/audio/music/level9.mp3";
+
+const level10Music = document.createElement("audio");
+level10Music.src = "../assets/audio/music/level10.mp3";
 
 window.onload = () => {
   function startGame() {
