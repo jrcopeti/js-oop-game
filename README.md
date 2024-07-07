@@ -2,8 +2,6 @@
 
 https://catch-them-all.vercel.app/
 
-Screenshot:
-
 ![Screenshot](/assets/screenshots/1.png)
 Intro screen
 
@@ -88,3 +86,7 @@ The game features a player character that can move up and down, right and left, 
 - **Sound Effects**: Adds sound effects for the actions on the game.
 - **Music**: Includes background music that plays during the game.
 - **Pause/Resume**: Allows the player to pause and resume the game using the Enter key.
+
+
+Description:
+A Pokémon game built using HTML5 Canvas and JavaScript classes. The game challenges players to catch various Pokémon by throwing Pokéballs as they move across the screen. Each level increases in difficulty.
