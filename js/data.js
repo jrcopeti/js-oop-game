@@ -196,7 +196,7 @@ const levels = [
     speed: 3,
     specialRate: 2000,
     specialSpeed: 5,
-    music: level7Music,
+    music: level8Music,
   },
 
   {
@@ -207,7 +207,7 @@ const levels = [
     speed: 5,
     specialRate: 1000,
     specialSpeed: 6,
-    music: level8Music,
+    music: level9Music,
   },
   {
     level: "10",
@@ -217,7 +217,7 @@ const levels = [
     speed: 2,
     specialRate: 200,
     specialSpeed: 15,
-    music: level9Music,
+    music: level10Music,
   },
 ];
 
