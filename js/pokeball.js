@@ -22,4 +22,4 @@ class Pokeball {
     this.x += this.speed;
   }
 }
-console.log("Pokeball class loaded")
+console.log("Pokeball class loaded");

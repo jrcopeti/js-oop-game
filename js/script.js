@@ -1,3 +1,4 @@
+//Selecting elements
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
@@ -18,19 +19,16 @@ const finalScoreDisplay = document.getElementById("final-score");
 const musicVol = 0.3;
 const sfxVol = 0.7;
 
-// const captureAudio = new Audio("../assets/audio/capture2.wav");
 const captureAudio = document.createElement("audio");
 captureAudio.src = "../assets/audio/capture2.wav";
-// const throwAudio = new Audio("../assets/audio/throw2.mp3 ");
+
 const throwAudio = document.createElement("audio");
 throwAudio.src = "../assets/audio/throw2.mp3";
-// const levelUpAudio = new Audio("../assets/audio/levelup2.mp3");
+
 const levelUpAudio = document.createElement("audio");
 levelUpAudio.src = "../assets/audio/levelup.mp3";
 levelUpAudio.volume = musicVol;
 
-// const gameOverAudio = new Audio("../assets/audio/gameover.wav");
-// gameOverAudio.volume = sfxVol;
 const gameOverAudio = document.createElement("audio");
 gameOverAudio.src = "../assets/audio/gameover.wav";
 gameOverAudio.volume = sfxVol;
@@ -87,6 +85,7 @@ level9Music.src = "../assets/audio/music/level9.mp3";
 const level10Music = document.createElement("audio");
 level10Music.src = "../assets/audio/music/level10.mp3";
 
+// Game
 window.onload = () => {
   function startGame() {
     startScreen.style.display = "none";

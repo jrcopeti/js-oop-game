@@ -83,54 +83,41 @@ class Game {
     if (possibleKeys.includes(key)) {
       e.preventDefault();
 
+      if (key === "Enter") {
+        this.pause = !this.pause;
+        return;
+      }
+
+      if (this.pause) {
+        return;
+      }
+
       switch (key) {
         case "ArrowUp":
-          if (this.pause) {
-            return;
-          }
           this.player.move("up");
           break;
         case "ArrowDown":
-          if (this.pause) {
-            return;
-          }
           this.player.move("down");
           break;
         case "ArrowLeft":
-          if (this.pause) {
-            return;
-          }
           this.player.move("left");
           break;
         case "ArrowRight":
-          if (this.pause) {
-            return;
-          }
           this.player.move("right");
           break;
         case " ":
-          if (this.pause) {
-            return;
-          }
           const pokeball = this.player.throw();
           this.pokeballArr.push(pokeball);
           break;
         case "m":
-          if (this.pause) {
-            return;
-          }
           const used = this.player.useMasterball();
           if (used) {
             this.defeatAllPokemon();
           }
           break;
-        case "Enter":
-          this.pause = !this.pause;
-          break;
       }
     }
   }
-
   updatePokeballs() {
     this.pokeballArr.forEach((pokeball, index) => {
       pokeball.move();
@@ -356,13 +343,11 @@ class Game {
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
-          // this.player.gainMasterball();
           break;
 
         case "Mew":
         case "Ho-oh":
         case "Venosaur":
-          // this.player.gainLife();
           break;
 
         default:
@@ -497,8 +482,6 @@ class Game {
 
   displayScore() {
     const text = `Score: ${this.score}`;
-    // const textWidth = ctx.measureText(text).width;
-    // const padding = 20;
     const fixedText = 200;
     ctx.font = "bold 25px Arial";
     ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
