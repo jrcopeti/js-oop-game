@@ -1,7 +1,7 @@
 class Player {
   constructor(canvas) {
-    this.width = 70;
-    this.height = 70;
+    this.width = 80;
+    this.height = 80;
     this.x = 10;
     this.y = canvas.height / 2 - this.height / 2;
     this.speed = 40;
@@ -33,11 +33,20 @@ class Player {
   }
 
   move(direction) {
-    const topBoundary = 85;
+    const topBoundary = 100;
+    const bottomBoundary = canvas.height - this.height - 20;
+    const leftBoundary = 10;
+    const rightBoundary = canvas.width - this.width - 30
+     ;
+
     if (direction === "up" && this.y > topBoundary) {
       this.y -= this.speed;
-    } else if (direction === "down" && this.y + this.height < canvas.height) {
+    } else if (direction === "down" && this.y < bottomBoundary) {
       this.y += this.speed;
+    } else if (direction === "left" && this.x > leftBoundary) {
+      this.x -= this.speed;
+    } else if (direction === "right" && this.x < rightBoundary) {
+      this.x += this.speed;
     }
   }
 

@@ -69,7 +69,15 @@ class Game {
 
   handleKeydown(e) {
     const key = e.key;
-    const possibleKeys = ["ArrowUp", "ArrowDown", " ", "m", "Enter"];
+    const possibleKeys = [
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      " ",
+      "m",
+      "Enter",
+    ];
     if (possibleKeys.includes(key)) {
       e.preventDefault();
 
@@ -85,6 +93,18 @@ class Game {
             return;
           }
           this.player.move("down");
+          break;
+        case "ArrowLeft":
+          if (this.pause) {
+            return;
+          }
+          this.player.move("left");
+          break;
+        case "ArrowRight":
+          if (this.pause) {
+            return;
+          }
+          this.player.move("right");
           break;
         case " ":
           if (this.pause) {
