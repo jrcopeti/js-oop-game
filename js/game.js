@@ -50,13 +50,14 @@ class Game {
     this.updatePokemon();
     this.checkCollision();
     this.checkPlayerCollision();
-    this.drawScorePopups();
-    this.updateScorePopups();
+
     this.displayScore();
     this.displayLives();
     this.displayLevel();
     this.displayCount();
     this.displayMasterball();
+    this.drawScorePopups();
+    this.updateScorePopups();
     this.lifeBonus();
     this.masterballBonus();
     this.levelUp();
@@ -132,6 +133,18 @@ class Game {
           case "Kadabra":
           case "Gengar":
           case "Gastly":
+
+          case "Mewtwo":
+          case "Lugia":
+          case "Charizard":
+          case "Mew":
+          case "Ho-oh":
+          case "Venosaur":
+          case "Jynx":
+          case "Blastoise":
+          case "Dragonite":
+          case "Celebi":
+          case "Entei":
             break;
           default:
             this.player.loseLife();
@@ -305,6 +318,7 @@ class Game {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
       this.flashScreen();
+      this.useScorePopup(pokemon, true);
       switch (pokemon.name) {
         case "Weezing":
         case "Arbok":
@@ -313,7 +327,7 @@ class Game {
         case "Kadabra":
         case "Gengar":
         case "Gastly":
-          // this.score = this.score;
+          this.score += pokemon.score;
           break;
 
         case "Mewtwo":
@@ -333,7 +347,6 @@ class Game {
           captureAudio.play();
           this.score += pokemon.score;
           this.pokemonCount += 1;
-          // this.score += pokemon.score;
           break;
       }
       console.log("Caught all pokémon", pokemon.name, "score:", pokemon.score);
@@ -396,38 +409,72 @@ class Game {
     }
   }
 
-  useScorePopup(pokemon) {
+  useScorePopup(pokemon, masterball = false) {
     let color;
-    let scoreValue;
+    let score;
     let image;
     switch (pokemon.name) {
       case "Weezing":
       case "Arbok":
-        color = "217, 30, 24";
-        scoreValue = -pokemon.score;
-        image = "../assets/masterball.png";
+        if (!masterball) {
+          color = "217, 30, 24";
+          score = -pokemon.score;
+          image = "../assets/masterball.png";
+        } else {
+          color = "4, 147, 114";
+          score = pokemon.score;
+        }
+
         break;
       case "Ekans":
       case "Koffing":
       case "Kadabra":
-        color = "217, 30, 24";
-        scoreValue = -pokemon.score;
+        if (!masterball) {
+          color = "217, 30, 24";
+          score = -pokemon.score;
+        } else {
+          color = "4, 147, 114";
+          score = pokemon.score;
+        }
         break;
+
       case "Gengar":
       case "Gastly":
-        color = "217, 30, 24";
-        scoreValue = -pokemon.score;
+        if (!masterball) {
+          color = "217, 30, 24";
+          score = -pokemon.score;
+          image = "../assets/heart.png";
+        } else {
+          color = "4, 147, 114";
+          score = pokemon.score;
+        }
+        break;
+
+      case "Mewtwo":
+      case "Lugia":
+      case "Charizard":
+        color = "4, 147, 114";
+        score = pokemon.score;
+        image = "../assets/masterball.png";
+        break;
+
+      case "Mew":
+      case "Ho-oh":
+      case "Venosaur":
+        color = "4, 147, 114";
+        score = pokemon.score;
         image = "../assets/heart.png";
         break;
+
       default:
         color = "4, 147, 114";
-        scoreValue = pokemon.score;
+        score = pokemon.score;
         break;
     }
     this.createScorePopup(
       pokemon.x + pokemon.width / 2,
       pokemon.y,
-      scoreValue,
+      score,
       color,
       image
     );
@@ -443,11 +490,12 @@ class Game {
 
   displayScore() {
     const text = `Score: ${this.score}`;
-    const textWidth = ctx.measureText(text).width;
-    const padding = 20;
+    // const textWidth = ctx.measureText(text).width;
+    // const padding = 20;
+    const fixedText = 200;
     ctx.font = "bold 25px Arial";
     ctx.fillStyle = "rgba(0, 0, 0, 0.5)";
-    ctx.fillRect(5, 6, textWidth + padding, 32);
+    ctx.fillRect(5, 6, fixedText, 32);
     ctx.fillStyle = "white";
     ctx.fillText(text, 10, 30);
   }
