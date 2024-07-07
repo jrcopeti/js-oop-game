@@ -134,8 +134,9 @@ class Game {
             this.player.loseLife();
             this.player.hit();
         }
+        pokemon.state = "remove";
 
-        this.pokemonArr.splice(index, 1);
+        this.pokemonArr.filter((pokemon) => pokemon.state === "active");
       }
     });
   }
@@ -349,12 +350,12 @@ class Game {
       this.currentLevel < levels.length - 1 &&
       this.pokemonCount >= levels[this.currentLevel].maxCount
     ) {
+      this.flashScreen();
       this.currentLevel++;
+      this.background.src = levels[this.currentLevel].background;
       this.pokemonCount = 0;
       this.pokemonArr = [];
-      this.flashScreen();
       levelUpAudio.play();
-      this.background.src = levels[this.currentLevel].background;
       this.showPokemon();
       this.showSpecialPokemon();
     } else if (

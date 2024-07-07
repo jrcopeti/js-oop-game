@@ -74,7 +74,6 @@ class Player {
 
   loseMasterball() {
     this.masterballs -= 1;
-    
   }
 
   loseLife() {
