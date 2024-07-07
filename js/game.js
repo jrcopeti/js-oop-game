@@ -7,8 +7,8 @@ class Game {
     this.specialPokemonData = specialPokemonData;
     this.score = 0;
     this.scorePopups = [];
-    this.lifeScoreBonus = 2000;
-    this.masterballScoreBonus = 1000;
+    this.lifeScoreBonus = 5000;
+    this.masterballScoreBonus = 3000;
     this.heart = document.createElement("img");
     this.heart.src = "../assets/heart.png";
     this.masterball = document.createElement("img");
@@ -410,14 +410,14 @@ class Game {
   lifeBonus() {
     if (this.score >= this.lifeScoreBonus) {
       this.player.gainLife();
-      this.lifeScoreBonus += 2000;
+      this.lifeScoreBonus += 5000;
     }
   }
 
   masterballBonus() {
     if (this.score >= this.masterballScoreBonus) {
       this.player.gainMasterball();
-      this.masterballScoreBonus += 1000;
+      this.masterballScoreBonus += 3000;
     }
   }
 
@@ -585,6 +585,7 @@ class Game {
       this.currentMusic.volume = musicVol;
       this.currentMusic.play();
     }
+
   }
 
   endGame() {

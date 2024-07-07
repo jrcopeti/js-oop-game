@@ -139,7 +139,20 @@ h1 {
   height: 50px;
 }
 
-.control-container,
+.score-section img {
+  width: 30px;
+  height: auto;
+
+}
+
+.score-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.control-section,
 .pokemon-container,
 .rare-container,
 .enemy-container p {

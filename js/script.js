@@ -17,7 +17,7 @@ const finalScoreDisplay = document.getElementById("final-score");
 //Audio
 
 const musicVol = 0.3;
-const sfxVol = 0.8;
+const sfxVol = 0.7;
 
 const captureAudio = new Audio("../assets/audio/capture2.wav");
 const throwAudio = new Audio("../assets/audio/throw2.mp3 ");
