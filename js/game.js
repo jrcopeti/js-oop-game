@@ -16,6 +16,11 @@ class Game {
     this.currentLevel = 0;
     this.background = document.createElement("img");
     this.background.src = levels[this.currentLevel].background;
+
+    this.background.onload = () => {
+      this.ready = true;
+    };
+
     this.pokemonCount = 0;
     this.interval = null;
     this.specialInterval = null;
@@ -47,25 +52,27 @@ class Game {
       this.endGame();
     }
 
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
+    if (this.ready) {
+      console.log("ready", this.ready);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
+      this.player.draw(ctx);
+      this.updatePokeballs();
+      this.updatePokemon();
+      this.checkCollision();
+      this.checkPlayerCollision();
 
-    this.player.draw(ctx);
-    this.updatePokeballs();
-    this.updatePokemon();
-    this.checkCollision();
-    this.checkPlayerCollision();
-
-    this.displayScore();
-    this.displayLives();
-    this.displayLevel();
-    this.displayCount();
-    this.displayMasterball();
-    this.drawScorePopups();
-    this.updateScorePopups();
-    this.lifeBonus();
-    this.masterballBonus();
-    this.levelUp();
+      this.displayScore();
+      this.displayLives();
+      this.displayLevel();
+      this.displayCount();
+      this.displayMasterball();
+      this.drawScorePopups();
+      this.updateScorePopups();
+      this.lifeBonus();
+      this.masterballBonus();
+      this.levelUp();
+    }
   }
 
   controls() {
