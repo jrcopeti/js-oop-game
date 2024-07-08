@@ -61,7 +61,6 @@ class Game {
       this.updatePokemon();
       this.checkCollision();
       this.checkPlayerCollision();
-
       this.displayScore();
       this.displayLives();
       this.displayLevel();
@@ -152,7 +151,6 @@ class Game {
           case "Kadabra":
           case "Gengar":
           case "Gastly":
-
           case "Mewtwo":
           case "Lugia":
           case "Charizard":
@@ -229,7 +227,7 @@ class Game {
 
   checkCollision() {
     this.pokeballArr.forEach((pokeball, pokeballIndex) => {
-      this.pokemonArr.forEach((pokemon, pokemonIndex) => {
+      this.pokemonArr.forEach((pokemon) => {
         if (
           pokeball.x < pokemon.x + pokemon.width &&
           pokeball.x + pokeball.width > pokemon.x &&
@@ -247,6 +245,7 @@ class Game {
           switch (pokemon.name) {
             case "Weezing":
             case "Arbok":
+              this.flashScreen();
               enemyAudio.play();
               this.player.masterballs > 0 ? this.player.loseMasterball() : null;
               this.pokemonCount > 0
@@ -255,12 +254,12 @@ class Game {
               this.score - pokemon.score >= 0
                 ? (this.score -= pokemon.score)
                 : (this.score = 0);
-              this.flashScreen();
               break;
 
             case "Ekans":
             case "Koffing":
             case "Kadabra":
+              this.flashScreen();
               enemyAudio.play();
               this.pokemonCount > 0
                 ? (this.pokemonCount -= 1)
@@ -268,7 +267,6 @@ class Game {
               this.score - pokemon.score >= 0
                 ? (this.score -= pokemon.score)
                 : (this.score = 0);
-              this.flashScreen();
               break;
 
             case "Gengar":
@@ -307,8 +305,8 @@ class Game {
               break;
 
             default:
-              this.score += pokemon.score;
               captureAudio.play();
+              this.score += pokemon.score;
               this.pokemonCount += 1;
               break;
           }
@@ -336,41 +334,17 @@ class Game {
   }
 
   defeatAllPokemon() {
+    console.log("defeatAllPokemon");
     this.pokemonArr.forEach((pokemon) => {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
       this.flashScreen();
       this.useScorePopup(pokemon, true);
-      switch (pokemon.name) {
-        case "Weezing":
-        case "Arbok":
-        case "Ekans":
-        case "Koffing":
-        case "Kadabra":
-        case "Gengar":
-        case "Gastly":
-        case "Mewtwo":
-        case "Lugia":
-        case "Charizard":
-        case "Mew":
-        case "Ho-oh":
-        case "Venosaur":
-        case "Jynx":
-        case "Blastoise":
-          captureAudio.play();
-          this.pokemonCount += 1;
-          break;
-
-        default:
-          captureAudio.play();
-          this.pokemonCount += 1;
-          break;
-      }
-      console.log("Caught all pokémon", pokemon.name);
-
       setTimeout(() => {
         this.pokemonArr = [];
       }, 100);
+      this.pokemonCount += 1;
+      this.score += 100;
     });
   }
 
@@ -385,11 +359,11 @@ class Game {
       this.pokemonCount >= levels[this.currentLevel].maxCount
     ) {
       this.flashScreen();
+      levelUpAudio.play();
       this.currentLevel++;
       this.background.src = levels[this.currentLevel].background;
       this.pokemonCount = 0;
       this.pokemonArr = [];
-      levelUpAudio.play();
       this.showPokemon();
       this.showSpecialPokemon();
       this.playMusic();
@@ -473,6 +447,16 @@ class Game {
           score = pokemon.score;
           break;
       }
+      this.createScorePopup(
+        pokemon.x + pokemon.width / 2,
+        pokemon.y,
+        score,
+        color,
+        image
+      );
+    } else {
+      color = green;
+      score = 100;
       this.createScorePopup(
         pokemon.x + pokemon.width / 2,
         pokemon.y,
