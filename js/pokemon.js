@@ -36,7 +36,6 @@ class Pokemon {
   }
 
   captured() {
-    captureAudio.play();
     this.image.src = "../assets/capture.png";
     this.speed = 0;
     setTimeout(() => {

@@ -285,6 +285,7 @@ class Game {
             case "Mewtwo":
             case "Lugia":
             case "Charizard":
+              captureAudio.play();
               this.player.gainMasterball();
               this.score += pokemon.score;
               break;
@@ -292,12 +293,14 @@ class Game {
             case "Mew":
             case "Ho-oh":
             case "Venosaur":
+              captureAudio.play();
               this.player.gainLife();
               this.score += pokemon.score;
               break;
 
             case "Jynx":
             case "Blastoise":
+              captureAudio.play();
               useMasterballAudio.volume = sfxVol;
               useMasterballAudio.play();
               this.defeatAllPokemon();
