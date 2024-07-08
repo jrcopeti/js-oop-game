@@ -53,7 +53,6 @@ class Game {
     }
 
     if (this.ready) {
-      console.log("ready", this.ready);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(this.background, 0, 0, canvas.width, canvas.height);
       this.player.draw(ctx);
@@ -337,7 +336,6 @@ class Game {
   }
 
   defeatAllPokemon() {
-    console.log("defeatAllPokemon");
     this.pokemonArr.forEach((pokemon) => {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
@@ -347,7 +345,7 @@ class Game {
         this.pokemonArr = [];
       }, 100);
       this.pokemonCount += 1;
-      this.score += 100;
+      this.score += 10;
     });
   }
 
@@ -459,7 +457,7 @@ class Game {
       );
     } else {
       color = green;
-      score = 100;
+      score = 10;
       this.createScorePopup(
         pokemon.x + pokemon.width / 2,
         pokemon.y,

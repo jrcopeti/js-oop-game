@@ -81,11 +81,11 @@ const specialPokemonData = [
     imageSrc: "../assets/special-pokemon/lugia.png",
     score: 500,
   },
-  { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 1000 },
+  { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 300 },
   {
     name: "Blastoise",
     imageSrc: "../assets/special-pokemon/blastoise.png",
-    score: 1000,
+    score: 300,
   },
   {
     name: "Charizard",
