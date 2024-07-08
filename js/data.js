@@ -117,28 +117,6 @@ const specialPokemonData = [
 ];
 
 const levels = [
-
-  {
-    level: "8",
-    background: "../assets/background/ice.png",
-    maxCount: 350,
-    rate: 200,
-    speed: 3,
-    specialRate: 2000,
-    specialSpeed: 5,
-    music: level8Music,
-  },
-
-  {
-    level: "9",
-    background: "../assets/background/fire.png",
-    maxCount: 150,
-    rate: 1000,
-    speed: 5,
-    specialRate: 1000,
-    specialSpeed: 6,
-    music: level9Music,
-  },
   {
     level: "1",
     background: "../assets/background/mount-background.png",
