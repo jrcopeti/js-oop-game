@@ -2,26 +2,7 @@
 
 https://catch-them-all.vercel.app/
 
-![Screenshot](/assets/screenshots/1.png)
-Intro screen
-
-![Screenshot](/assets/screenshots/2.png)
-Instructions
-
-![Screenshot](/assets/screenshots/3.png)
-Gameplay
-
-![Screenshot](/assets/screenshots/6.png)
-Throwing a Pokéball
-
-![Screenshot](/assets/screenshots/4.png)
-Catching a Pokémon
-
-![Screenshot](/assets/screenshots/5.png)
-Using a Masterball
-
-![Screenshot](/assets/screenshots/7.png)
-Game over
+https://github.com/jrcopeti/js-oop-game-catch-them-all/assets/115017853/e5e9097d-d8b4-43c1-a8b1-082b9f13dd40
 
 ## Description
 
@@ -87,5 +68,23 @@ The game features a player character that can move up and down, right and left, 
 - **Music**: Includes background music that plays during the game.
 - **Pause/Resume**: Allows the player to pause and resume the game using the Enter key.
 
-Description:
-A Pokémon game built using HTML5 Canvas and JavaScript classes. The game challenges players to catch various Pokémon by throwing Pokéballs as they move across the screen. Each level increases in difficulty.
+![Screenshot](/assets/screenshots/1.png)
+Intro screen
+
+![Screenshot](/assets/screenshots/2.png)
+Instructions
+
+![Screenshot](/assets/screenshots/3.png)
+Gameplay
+
+![Screenshot](/assets/screenshots/6.png)
+Throwing a Pokéball
+
+![Screenshot](/assets/screenshots/4.png)
+Catching a Pokémon
+
+![Screenshot](/assets/screenshots/5.png)
+Using a Masterball
+
+![Screenshot](/assets/screenshots/7.png)
+Game over
