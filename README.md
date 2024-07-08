@@ -2,7 +2,7 @@
 
 https://catch-them-all.vercel.app/
 
-https://github.com/jrcopeti/js-oop-game-catch-them-all/assets/115017853/e5e9097d-d8b4-43c1-a8b1-082b9f13dd40
+https://github.com/jrcopeti/js-oop-game-catch-them-all/assets/115017853/c2b8a8c8-0120-4bcc-93bb-1e300c8f732d
 
 ## Description
 
@@ -12,7 +12,7 @@ The game features a player character that can move up and down, right and left, 
 
 ## Features
 
-- **HTML5 Canvas**: For rendering game graphics.
+- **HTML Canvas**: For rendering game graphics.
 - **JavaScript**: Used to create game logic, control animations, and manage game states.
 - **CSS**: Styles the game canvas and UI elements for a visually appealing experience.
 
