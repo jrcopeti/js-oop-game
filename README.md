@@ -68,6 +68,12 @@ The game features a player character that can move up and down, right and left, 
 - **Music**: Includes background music that plays during the game.
 - **Pause/Resume**: Allows the player to pause and resume the game using the Enter key.
 
+### Disclaimer
+
+This project is for personal use and portfolio purposes only. All assets were taken from the internet and are not owned by me. All Pokémon images, names, and related content are the property of Nintendo, Game Freak, and The Pokémon Company. No copyright infringement is intended.
+
+## Screenshots
+
 ![Screenshot](/assets/screenshots/1.png)
 Intro screen
 
