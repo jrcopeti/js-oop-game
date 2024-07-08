@@ -97,13 +97,16 @@ window.onload = () => {
   function playGame() {
     const game = new Game();
     game.start();
-    const interval = setInterval(() => {
+
+    function gameLoop() {
       game.update();
 
-      if (game.gameOver) {
-        clearInterval(interval);
+      if (!game.gameOver) {
+        requestAnimationFrame(gameLoop);
       }
-    }, Math.round(1000 / 60));
+    }
+
+    gameLoop();
   }
 
   startButton.addEventListener("click", () => {
@@ -122,3 +125,17 @@ window.onload = () => {
     location.reload();
   });
 };
+
+
+
+  // function playGame() {
+  //   const game = new Game();
+  //   game.start();
+  //   const interval = setInterval(() => {
+  //     game.update();
+
+  //     if (game.gameOver) {
+  //       clearInterval(interval);
+  //     }
+  //   }, Math.round(1000 / 60));
+  // }

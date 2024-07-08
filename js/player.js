@@ -78,9 +78,8 @@ class Player {
 
   gainMasterball() {
     if (this.masterballs >= 10) return;
-
-    this.masterballs += 1;
     gainMasterballAudio.play();
+    this.masterballs += 1;
   }
 
   loseMasterball() {
@@ -88,14 +87,14 @@ class Player {
   }
 
   loseLife() {
-    this.lives -= 1;
     hitAudio.play();
+    this.lives -= 1;
   }
 
   gainLife() {
     if (this.lives >= 20) return;
-    this.lives += 1;
     heartAudio.play();
+    this.lives += 1;
   }
 
   hit() {
