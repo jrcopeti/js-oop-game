@@ -565,6 +565,7 @@ class Game {
 
   finalGame() {
     this.gameOver = true;
+    levelUpAudio.play();
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(this.interval);
     clearInterval(this.specialInterval);
