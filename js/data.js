@@ -50,71 +50,80 @@ const pokemonData = [
 ];
 
 const specialPokemonData = [
-  {
-    name: "Celebi",
-    imageSrc: "../assets/special-pokemon/celebi.png",
-    score: 1000,
-  },
-  {
-    name: "Entei",
-    imageSrc: "../assets/special-pokemon/entei.png",
-    score: 1000,
-  },
-  {
-    name: "Ho-oh",
-    imageSrc: "../assets/special-pokemon/ho-oh.png",
-    score: 500,
-  },
-  { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 500 },
-  {
-    name: "Mewtwo",
-    imageSrc: "../assets/special-pokemon/mewtwo.png",
-    score: 500,
-  },
-  {
-    name: "Dragonite",
-    imageSrc: "../assets/special-pokemon/dragonite.png",
-    score: 1000,
-  },
-  {
-    name: "Lugia",
-    imageSrc: "../assets/special-pokemon/lugia.png",
-    score: 500,
-  },
   { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 1000 },
   {
     name: "Blastoise",
     imageSrc: "../assets/special-pokemon/blastoise.png",
     score: 1000,
   },
-  {
-    name: "Charizard",
-    imageSrc: "../assets/special-pokemon/charizard.png",
-    score: 500,
-  },
-  {
-    name: "Venosaur",
-    imageSrc: "../assets/special-pokemon/venosaur.png",
-    score: 500,
-  },
-
-  // enemy pokemon
-  {
-    name: "Arbok",
-    imageSrc: "../assets/special-pokemon/arbok.png",
-    score: 500,
-  },
-  {
-    name: "Weezing",
-    imageSrc: "../assets/special-pokemon/weezing.png",
-    score: 500,
-  },
-  {
-    name: "Gengar",
-    imageSrc: "../assets/special-pokemon/gengar.png",
-    score: 500,
-  },
 ];
+
+// const specialPokemonData = [
+//   {
+//     name: "Celebi",
+//     imageSrc: "../assets/special-pokemon/celebi.png",
+//     score: 1000,
+//   },
+//   {
+//     name: "Entei",
+//     imageSrc: "../assets/special-pokemon/entei.png",
+//     score: 1000,
+//   },
+//   {
+//     name: "Ho-oh",
+//     imageSrc: "../assets/special-pokemon/ho-oh.png",
+//     score: 500,
+//   },
+//   { name: "Mew", imageSrc: "../assets/special-pokemon/mew.png", score: 500 },
+//   {
+//     name: "Mewtwo",
+//     imageSrc: "../assets/special-pokemon/mewtwo.png",
+//     score: 500,
+//   },
+//   {
+//     name: "Dragonite",
+//     imageSrc: "../assets/special-pokemon/dragonite.png",
+//     score: 1000,
+//   },
+//   {
+//     name: "Lugia",
+//     imageSrc: "../assets/special-pokemon/lugia.png",
+//     score: 500,
+//   },
+//   { name: "Jynx", imageSrc: "../assets/special-pokemon/jynx.png", score: 1000 },
+//   {
+//     name: "Blastoise",
+//     imageSrc: "../assets/special-pokemon/blastoise.png",
+//     score: 1000,
+//   },
+//   {
+//     name: "Charizard",
+//     imageSrc: "../assets/special-pokemon/charizard.png",
+//     score: 500,
+//   },
+//   {
+//     name: "Venosaur",
+//     imageSrc: "../assets/special-pokemon/venosaur.png",
+//     score: 500,
+//   },
+
+//   // enemy pokemon
+//   {
+//     name: "Arbok",
+//     imageSrc: "../assets/special-pokemon/arbok.png",
+//     score: 500,
+//   },
+//   {
+//     name: "Weezing",
+//     imageSrc: "../assets/special-pokemon/weezing.png",
+//     score: 500,
+//   },
+//   {
+//     name: "Gengar",
+//     imageSrc: "../assets/special-pokemon/gengar.png",
+//     score: 500,
+//   },
+// ];
 
 const levels = [
   {

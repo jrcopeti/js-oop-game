@@ -36,7 +36,10 @@ class Game {
 
   update() {
     if (this.pause || this.gameOver) {
+      this.currentMusic.pause();
       return;
+    } else {
+      this.currentMusic.play();
     }
 
     if (this.player.lives <= 0) {
@@ -294,6 +297,7 @@ class Game {
               useMasterballAudio.play();
               this.defeatAllPokemon();
               this.score += pokemon.score;
+              break;
 
             default:
               this.score += pokemon.score;
@@ -338,16 +342,16 @@ class Game {
         case "Kadabra":
         case "Gengar":
         case "Gastly":
-          break;
-
         case "Mewtwo":
         case "Lugia":
         case "Charizard":
-          break;
-
         case "Mew":
         case "Ho-oh":
         case "Venosaur":
+        case "Jynx":
+        case "Blastoise":
+          captureAudio.play();
+          this.pokemonCount += 1;
           break;
 
         default:
@@ -548,15 +552,14 @@ class Game {
       this.currentMusic.currentTime = 0;
     }
 
-    if (levels[this.currentLevel].music) {
-      this.currentMusic = levels[this.currentLevel].music;
-      this.currentMusic.volume = musicVol;
-      this.currentMusic.loop = true;
-      this.currentMusic.play();
-    }
+    this.currentMusic = levels[this.currentLevel].music;
+    this.currentMusic.volume = musicVol;
+    this.currentMusic.loop = true;
+    this.currentMusic.play();
   }
 
   endGame() {
+    this.currentMusic.pause();
     this.gameOver = true;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     clearInterval(this.interval);

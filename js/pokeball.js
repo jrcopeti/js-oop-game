@@ -7,15 +7,10 @@ class Pokeball {
     this.speed = 7;
     this.image = document.createElement("img");
     this.image.src = "../assets/pokeball-red.png";
-    this.image.onload = () => {
-      this.ready = true;
-    };
   }
 
   draw(ctx) {
-    if (this.ready) {
-      ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
-    }
+    ctx.drawImage(this.image, this.x, this.y, this.width, this.height);
   }
 
   move() {
