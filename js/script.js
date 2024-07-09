@@ -126,16 +126,14 @@ window.onload = () => {
   });
 };
 
+// function playGame() {
+//   const game = new Game();
+//   game.start();
+//   const interval = setInterval(() => {
+//     game.update();
 
-
-  // function playGame() {
-  //   const game = new Game();
-  //   game.start();
-  //   const interval = setInterval(() => {
-  //     game.update();
-
-  //     if (game.gameOver) {
-  //       clearInterval(interval);
-  //     }
-  //   }, Math.round(1000 / 60));
-  // }
+//     if (game.gameOver) {
+//       clearInterval(interval);
+//     }
+//   }, Math.round(1000 / 60));
+// }

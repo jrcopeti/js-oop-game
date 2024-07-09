@@ -27,6 +27,10 @@ class Game {
     this.pause = false;
     this.gameOver = false;
     this.currentMusic = null;
+
+    this.flashActive = false;
+    this.flashFrames = 0;
+
     this.controls();
     this.showPokemon();
     this.showSpecialPokemon();
@@ -70,6 +74,7 @@ class Game {
       this.lifeBonus();
       this.masterballBonus();
       this.levelUp();
+      this.handleFlash();
     }
   }
 
@@ -244,7 +249,7 @@ class Game {
           switch (pokemon.name) {
             case "Weezing":
             case "Arbok":
-              this.flashScreen();
+              this.triggerFlash();
               enemyAudio.play();
               this.player.masterballs > 0 ? this.player.loseMasterball() : null;
               this.pokemonCount > 0
@@ -258,7 +263,7 @@ class Game {
             case "Ekans":
             case "Koffing":
             case "Kadabra":
-              this.flashScreen();
+              this.triggerFlash();
               enemyAudio.play();
               this.pokemonCount > 0
                 ? (this.pokemonCount -= 1)
@@ -336,10 +341,10 @@ class Game {
   }
 
   defeatAllPokemon() {
+    this.triggerFlash();
     this.pokemonArr.forEach((pokemon) => {
       pokemon.image.src = "../assets/capture.png";
       pokemon.speed = 0;
-      this.flashScreen();
       this.useScorePopup(pokemon, true);
       setTimeout(() => {
         this.pokemonArr = [];
@@ -350,8 +355,23 @@ class Game {
   }
 
   flashScreen() {
-    ctx.fillStyle = "rgba(255, 255, 255, 1)";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.5)";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  triggerFlash(duration = 2) {
+    this.flashActive = true;
+    this.flashFrames = duration;
+  }
+
+  handleFlash() {
+    if (this.flashActive) {
+      this.flashScreen();
+      this.flashFrames--;
+      if (this.flashFrames <= 0) {
+        this.flashActive = false;
+      }
+    }
   }
 
   levelUp() {
@@ -359,7 +379,7 @@ class Game {
       this.currentLevel < levels.length - 1 &&
       this.pokemonCount >= levels[this.currentLevel].maxCount
     ) {
-      this.flashScreen();
+      this.triggerFlash();
       levelUpAudio.play();
       this.currentLevel++;
       this.background.src = levels[this.currentLevel].background;
@@ -372,7 +392,7 @@ class Game {
       this.currentLevel === levels.length - 1 &&
       this.pokemonCount >= levels[this.currentLevel].maxCount
     ) {
-      this.flashScreen();
+      this.triggerFlash();
       this.finalGame();
     }
   }
