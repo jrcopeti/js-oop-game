@@ -184,8 +184,8 @@ const levels = [
     maxCount: 70,
     rate: 1000,
     speed: 6,
-    specialRate: 10000,
-    specialSpeed: 5,
+    specialRate: 5000,
+    specialSpeed: 4,
     music: level7Music,
   },
   {
