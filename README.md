@@ -6,9 +6,7 @@ https://github.com/jrcopeti/js-oop-game-catch-them-all/assets/115017853/c2b8a8c8
 
 ## Description
 
-Catch them all is an interactive web-based game built using HTML5 Canvas and JavaScript. The game challenges players to catch various Pokémon by throwing Pokéballs as they move across the screen. Each level increases in difficulty with faster-moving Pokémon and special events.
-
-The game features a player character that can move up and down, right and left, to catch Pokémons. Players can use Pokéballs to catch Pokémon and earn points. Special masterballs can catch all Pokémon on the screen at once. The game includes multiple levels with different backgrounds and sound effects.
+Catch them all is an interactive web-based game built using HTML5 Canvas and JavaScript. The game challenges players to catch Pokémon by throwing Pokéballs as they move across the screen. Each level increases in difficulty with faster-moving Pokémon and special events.
 
 ## Features
 
@@ -29,7 +27,7 @@ The game features a player character that can move up and down, right and left, 
 
 1. **Start the Game**: Click the 'Start Game' button on the initial screen.
 2. **Catch Pokémon**: Use the arrow keys to move your character up and down to align with Pokémon. Press the spacebar to throw Pokéballs.
-3. **Avoid Missing Pokémon**: Missing Pokémon will result in a loss of life..
+3. **Avoid Missing Pokémon**: Missing Pokémon will result in a loss of life.
 4. **Score Points**: Catching Pokémon earns points. Different Pokémon are worth varying amounts of points.
 5. **Rare Pokémon**: They are worth more points and carry extra bonuses.
 6. **Use Masterballs**: Special masterballs can catch all Pokémon on the screen at once. Use them wisely!
